@@ -24,7 +24,6 @@ class ContextRetriever:
         self._metadata_extractor = SelfQuery(mock=mock)
         self._reranker = Reranker(mock=mock)
 
-    @opik.track(name="ContextRetriever.search")
     def search(
         self,
         query: str,
