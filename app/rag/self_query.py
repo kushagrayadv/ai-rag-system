@@ -1,18 +1,16 @@
-import opik
 from langchain_openai import ChatOpenAI
 from loguru import logger
 
-from llm_engineering.application import utils
-from llm_engineering.domain.documents import UserDocument
-from llm_engineering.domain.queries import Query
-from llm_engineering.settings import settings
+from .. import utils
+from domain.documents import UserDocument
+from domain.queries import Query
+from settings import settings
 
 from .base import RAGStep
 from .prompt_templates import SelfQueryTemplate
 
 
 class SelfQuery(RAGStep):
-    @opik.track(name="SelfQuery.generate")
     def generate(self, query: Query) -> Query:
         if self._mock:
             return query

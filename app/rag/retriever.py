@@ -1,22 +1,21 @@
 import concurrent.futures
 
-import opik
 from loguru import logger
 from qdrant_client.models import FieldCondition, Filter, MatchValue
 
-from llm_engineering.application import utils
-from llm_engineering.application.preprocessing.dispatchers import EmbeddingDispatcher
-from llm_engineering.domain.embedded_chunks import (
+from .. import utils
+from app.preprocessing.dispatchers import EmbeddingDispatcher
+from domain.embedded_chunks import (
     EmbeddedArticleChunk,
     EmbeddedChunk,
     EmbeddedPostChunk,
     EmbeddedRepositoryChunk,
 )
-from llm_engineering.domain.queries import EmbeddedQuery, Query
+from domain.queries import EmbeddedQuery, Query
 
-from .query_expanison import QueryExpansion
-from .reranking import Reranker
-from .self_query import SelfQuery
+from query_expansion import QueryExpansion
+from reranking import Reranker
+from self_query import SelfQuery
 
 
 class ContextRetriever:
