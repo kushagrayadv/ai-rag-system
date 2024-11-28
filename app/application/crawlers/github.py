@@ -5,7 +5,7 @@ import tempfile
 
 from loguru import logger
 
-from project.domain.documents import RepositoryDocument
+from app.domain.documents import RepositoryDocument
 from .base import BaseCrawler
 
 

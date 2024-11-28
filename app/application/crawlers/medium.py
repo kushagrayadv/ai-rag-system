@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 from loguru import logger
 
-from project.domain.documents import ArticleDocument
+from app.domain.documents import ArticleDocument
 
 from .base import BaseSeleniumCrawler
 

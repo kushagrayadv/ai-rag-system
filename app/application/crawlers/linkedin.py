@@ -6,9 +6,9 @@ from bs4.element import Tag
 from loguru import logger
 from selenium.webdriver.common.by import By
 
-from project.domain.documents import PostDocument
-from project.domain.exceptions import ImproperlyConfigured
-from project.settings import settings
+from app.domain.documents import PostDocument
+from app.domain.exceptions import ImproperlyConfigured
+from app.settings import settings
 
 from .base import BaseSeleniumCrawler
 

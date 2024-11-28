@@ -6,7 +6,7 @@ import chromedriver_autoinstaller
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-from project.domain.documents import NoSQLBaseDocument
+from app.domain.documents import NoSQLBaseDocument
 
 # Check if the current version of chromedriver exists
 # and if it doesn't exist, download it automatically,

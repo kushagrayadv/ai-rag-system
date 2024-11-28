@@ -2,8 +2,8 @@ from loguru import logger
 from clearml import Task
 from typing import Dict
 
-from project.application import utils
-from project.domain.documents import UserDocument
+from app.application import utils
+from app.domain.documents import UserDocument
 
 
 @Task.add_function_step(name="get_or_create_user", return_values=["user"])
