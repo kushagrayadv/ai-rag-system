@@ -1,57 +1,34 @@
-from urllib.parse import urlparse
-
 from loguru import logger
-from tqdm import tqdm
-from clearml import Task, Logger
+from clearml import Task
+from typing import Dict
 
-from project.application.crawlers.dispatcher import CrawlerDispatcher
+from project.application import utils
 from project.domain.documents import UserDocument
 
 
-def crawl_links(user: UserDocument, links: list[str]) -> list[str]:
-    task = Task.init(project_name="Link Crawling", task_name="Crawl Links")
-    task.connect(links)
-    task.connect(user)
+@Task.add_function_step(name="get_or_create_user", return_values=["user"])
 
-    dispatcher = CrawlerDispatcher.build().register_linkedin().register_medium().register_github()
+def get_or_create_user(user_full_name: str) -> UserDocument:
+    logger.info(f"Getting or creating user: {user_full_name}")
 
-    logger.info(f"Starting to crawl {len(links)} link(s).")
+    first_name, last_name = utils.split_user_full_name(user_full_name)
 
-    metadata = {}
-    successful_crawls = 0
-    for link in tqdm(links):
-        successful_crawl, crawled_domain = _crawl_link(dispatcher, link, user)
-        successful_crawls += successful_crawl
+    user = UserDocument.get_or_create(first_name=first_name, last_name=last_name)
 
-        metadata = _add_to_metadata(metadata, crawled_domain, successful_crawl)
+    task = Task.current_task()
+    task.upload_artifact("user_metadata", _get_metadata(user_full_name, user))
 
-    Logger.current_logger().report_table(
-        title="Crawl Results",
-        series="domain_stats",
-        iteration=0,
-        table_plot=metadata
-    )
-
-    logger.info(f"Successfully crawled {successful_crawls} / {len(links)} links.")
-
-    return links
+    return user
 
 
-def _crawl_link(dispatcher: CrawlerDispatcher, link: str, user: UserDocument) -> tuple[bool, str]:
-    crawler = dispatcher.get_crawler(link)
-    crawler_domain = urlparse(link).netloc
-
-    try:
-        crawler.extract(link=link, user=user)
-        return True, crawler_domain
-    except Exception as e:
-        logger.error(f"An error occurred while crawling: {e!s}")
-        return False, crawler_domain
-
-
-def _add_to_metadata(metadata: dict, domain: str, successful_crawl: bool) -> dict:
-    if domain not in metadata:
-        metadata[domain] = {"successful": 0, "total": 0}
-    metadata[domain]["successful"] += int(successful_crawl)
-    metadata[domain]["total"] += 1
-    return metadata
+def _get_metadata(user_full_name: str, user: UserDocument) -> Dict:
+    return {
+        "query": {
+            "user_full_name": user_full_name,
+        },
+        "retrieved": {
+            "user_id": str(user.id),
+            "first_name": user.first_name,
+            "last_name": user.last_name,
+        },
+    }

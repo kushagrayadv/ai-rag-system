@@ -32,7 +32,6 @@ pipe.add_function_step(
 
 pipe.set_default_execution_queue("default")
 
-# Start the pipeline
 if __name__ == "__main__":
     pipe.start()
     print(f"Pipeline started. Check the ClearML web UI for progress.")
