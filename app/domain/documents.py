@@ -49,10 +49,6 @@ class ArticleDocument(Document):
         name = DataCategory.ARTICLES
 
 class VideoDocument(NoSQLBaseDocument):
-    content: dict
-    platform: str
-    author_id: UUID4 = Field(alias="author_id")
-    author_full_name: str = Field(alias="author_full_name")
     name: str
     link: str
     description: Optional[str] = None
