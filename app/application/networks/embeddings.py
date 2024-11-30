@@ -1,0 +1,2 @@
+class EmbeddingModelSingleton:
+    pass
