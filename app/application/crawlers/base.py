@@ -8,9 +8,7 @@ from selenium.webdriver.chrome.options import Options
 
 from app.domain.documents import NoSQLBaseDocument
 
-# Check if the current version of chromedriver exists
-# and if it doesn't exist, download it automatically,
-# then add chromedriver to path
+
 chromedriver_autoinstaller.install()
 
 
@@ -53,7 +51,7 @@ class BaseSeleniumCrawler(BaseCrawler, ABC):
         pass
 
     def scroll_page(self) -> None:
-        """Scroll through the LinkedIn page based on the scroll limit."""
+
         current_scroll = 0
         last_height = self.driver.execute_script("return document.body.scrollHeight")
         while True:

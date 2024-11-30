@@ -1,5 +1,4 @@
 import re
-
 from langchain.text_splitter import RecursiveCharacterTextSplitter, SentenceTransformersTokenTextSplitter
 
 from app.application.networks import EmbeddingModelSingleton
