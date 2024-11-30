@@ -1,8 +1,8 @@
 from typing import List
-from clearml import Task, Logger
+from clearml import Task
 
-from app.application.preprocessing import CleaningDispatcher
-from app.domain.cleaned_documents import CleanedDocument
+from app.preprocessing.dispatchers import CleaningDispatcher
+from domain.cleaned_documents import CleanedDocument
 
 
 def clean_documents(documents: List[dict]) -> List[CleanedDocument]:

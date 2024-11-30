@@ -2,9 +2,9 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from loguru import logger
 from clearml import Task, Logger
 
-from app.application import utils
-from app.domain.base.nosql import NoSQLBaseDocument
-from app.domain.documents import ArticleDocument, Document, PostDocument, RepositoryDocument, UserDocument, VideoDocument
+from app import utils
+from domain.base.nosql import NoSQLBaseDocument
+from domain.documents import ArticleDocument, Document, PostDocument, RepositoryDocument, UserDocument, VideoDocument
 
 def query_data_warehouse(author_full_names: list[str]) -> list:
     task = Task.init(project_name="Data Warehouse Query", task_name="Query Author Data")
