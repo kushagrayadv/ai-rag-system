@@ -1,10 +1,10 @@
 from typing import List
 from clearml import Task
 
-from app.application import utils
-from app.application.preprocessing import ChunkingDispatcher, EmbeddingDispatcher
-from app.domain.chunks import Chunk
-from app.domain.embedded_chunks import EmbeddedChunk
+from app import utils
+from app.preprocessing.dispatchers import ChunkingDispatcher, EmbeddingDispatcher
+from domain.chunks import Chunk
+from domain.embedded_chunks import EmbeddedChunk
 
 def chunk_and_embed(cleaned_documents: List[str]) -> List[EmbeddedChunk]:
     task = Task.init(project_name="Your Project", task_name="Chunk and Embed")

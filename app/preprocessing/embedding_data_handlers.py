@@ -2,12 +2,13 @@ from abc import ABC, abstractmethod
 from typing import Generic, TypeVar, cast
 
 from app.networks import EmbeddingModelSingleton
-from domain.chunks import ArticleChunk, Chunk, PostChunk, RepositoryChunk
+from domain.chunks import ArticleChunk, Chunk, PostChunk, RepositoryChunk, VideoChunk
 from domain.embedded_chunks import (
     EmbeddedArticleChunk,
     EmbeddedChunk,
     EmbeddedPostChunk,
     EmbeddedRepositoryChunk,
+    EmbeddedVideoChunk,
 )
 from domain.queries import EmbeddedQuery, Query
 
@@ -98,6 +99,26 @@ class ArticleEmbeddingHandler(EmbeddingDataHandler):
 class RepositoryEmbeddingHandler(EmbeddingDataHandler):
     def map_model(self, data_model: RepositoryChunk, embedding: list[float]) -> EmbeddedRepositoryChunk:
         return EmbeddedRepositoryChunk(
+            id=data_model.id,
+            content=data_model.content,
+            embedding=embedding,
+            platform=data_model.platform,
+            name=data_model.name,
+            link=data_model.link,
+            document_id=data_model.document_id,
+            author_id=data_model.author_id,
+            author_full_name=data_model.author_full_name,
+            metadata={
+                "embedding_model_id": embedding_model.model_id,
+                "embedding_size": embedding_model.embedding_size,
+                "max_input_length": embedding_model.max_input_length,
+            },
+        )
+    
+# need to check on this
+class VideoEmbeddingHandler(EmbeddingDataHandler):
+    def map_model(self, data_model: VideoChunk, embedding: list[float]) -> EmbeddedVideoChunk:
+        return EmbeddedVideoChunk(
             id=data_model.id,
             content=data_model.content,
             embedding=embedding,

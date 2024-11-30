@@ -4,7 +4,7 @@ from typing import Optional
 from pydantic import UUID4, Field
 
 from base import VectorBaseDocument
-from .types import DataCategory
+from domain.types import DataCategory
 
 
 class Chunk(VectorBaseDocument, ABC):
@@ -36,3 +36,15 @@ class RepositoryChunk(Chunk):
 
     class Config:
         category = DataCategory.REPOSITORIES
+
+
+class VideoChunk(Chunk):
+    name: str
+    link: str
+    description: Optional[str] = None
+    views: Optional[int] = None
+    likes: Optional[int] = None
+    transcript: Optional[str] = None
+
+    class Config:
+        category = DataCategory.VIDEOS

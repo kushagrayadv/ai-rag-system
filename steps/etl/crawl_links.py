@@ -4,8 +4,8 @@ from loguru import logger
 from tqdm import tqdm
 from clearml import Task, Logger
 
-from app.application.crawlers.dispatcher import CrawlerDispatcher
-from app.domain.documents import UserDocument
+from app.crawlers.dispatcher import CrawlerDispatcher
+from domain.documents import UserDocument
 
 
 def crawl_links(user: UserDocument, links: list[str]) -> list[str]:

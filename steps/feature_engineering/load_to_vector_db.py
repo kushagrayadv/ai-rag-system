@@ -2,8 +2,8 @@ from loguru import logger
 from typing import List
 from clearml import Task, Logger
 
-from app.application import utils
-from app.domain.base import VectorBaseDocument
+from app import utils
+from domain.base import VectorBaseDocument
 
 @Task.add_function
 def load_to_vector_db(documents: List[VectorBaseDocument]) -> bool:

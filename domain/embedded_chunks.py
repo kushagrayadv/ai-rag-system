@@ -1,8 +1,8 @@
 from abc import ABC
-
+from typing import Optional
 from pydantic import UUID4, Field
 
-from .types import DataCategory
+from domain.types import DataCategory
 
 from .base import VectorBaseDocument
 
@@ -54,4 +54,18 @@ class EmbeddedRepositoryChunk(EmbeddedChunk):
     class Config:
         name = "embedded_repositories"
         category = DataCategory.REPOSITORIES
+        use_vector_index = True
+
+
+class EmbeddedVideoChunk(EmbeddedChunk):
+    name: str
+    link: str
+    description: Optional[str] = None
+    views: Optional[int] = None
+    likes: Optional[int] = None
+    transcript: Optional[str] = None
+
+    class Config:
+        name = "embedded_videos"
+        category = DataCategory.VIDEOS
         use_vector_index = True

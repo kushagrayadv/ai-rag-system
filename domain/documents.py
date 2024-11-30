@@ -47,3 +47,14 @@ class ArticleDocument(Document):
 
     class Settings:
         name = DataCategory.ARTICLES
+
+class VideoDocument(NoSQLBaseDocument):
+    name: str
+    link: str
+    description: Optional[str] = None
+    views: Optional[int] = None
+    likes: Optional[int] = None
+    transcript: Optional[str] = None
+
+    class Settings:
+        name = DataCategory.VIDEOS

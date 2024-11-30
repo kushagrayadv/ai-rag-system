@@ -1,12 +1,11 @@
 import time
-from typing import List, Dict
+from typing import Dict
 
 from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
 from loguru import logger
 
-from app.domain.documents import VideoDocument
+from domain.documents import VideoDocument
 from .base import BaseSeleniumCrawler
 
 

@@ -6,7 +6,7 @@ import chromedriver_autoinstaller
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-from app.domain.documents import NoSQLBaseDocument
+from domain.documents import NoSQLBaseDocument
 
 
 chromedriver_autoinstaller.install()

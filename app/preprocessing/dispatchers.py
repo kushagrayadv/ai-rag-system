@@ -1,19 +1,21 @@
 from loguru import logger
 
-from domain.base import NoSQLBaseDocument, VectorBaseDocument
 from domain.types import DataCategory
+from domain.base import NoSQLBaseDocument, VectorBaseDocument
 
 from .chunking_data_handlers import (
     ArticleChunkingHandler,
     ChunkingDataHandler,
     PostChunkingHandler,
     RepositoryChunkingHandler,
+    VideoChunkingHandler,
 )
 from .cleaning_data_handlers import (
     ArticleCleaningHandler,
     CleaningDataHandler,
     PostCleaningHandler,
     RepositoryCleaningHandler,
+    VideoCleaningHandler,
 )
 from .embedding_data_handlers import (
     ArticleEmbeddingHandler,
@@ -21,6 +23,7 @@ from .embedding_data_handlers import (
     PostEmbeddingHandler,
     QueryEmbeddingHandler,
     RepositoryEmbeddingHandler,
+    VideoEmbeddingHandler,
 )
 
 
@@ -33,6 +36,8 @@ class CleaningHandlerFactory:
             return ArticleCleaningHandler()
         elif data_category == DataCategory.REPOSITORIES:
             return RepositoryCleaningHandler()
+        elif data_category == DataCategory.VIDEOS:
+            return VideoCleaningHandler()
         else:
             raise ValueError("Unsupported data type")
 
@@ -64,6 +69,8 @@ class ChunkingHandlerFactory:
             return ArticleChunkingHandler()
         elif data_category == DataCategory.REPOSITORIES:
             return RepositoryChunkingHandler()
+        elif data_category == DataCategory.VIDEOS:
+            return VideoChunkingHandler()
         else:
             raise ValueError("Unsupported data type")
 
@@ -97,6 +104,8 @@ class EmbeddingHandlerFactory:
             return ArticleEmbeddingHandler()
         elif data_category == DataCategory.REPOSITORIES:
             return RepositoryEmbeddingHandler()
+        elif data_category == DataCategory.VIDEOS:
+            return VideoEmbeddingHandler()
         else:
             raise ValueError("Unsupported data type")
 

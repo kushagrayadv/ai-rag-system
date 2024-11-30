@@ -6,12 +6,14 @@ from domain.cleaned_documents import (
     CleanedDocument,
     CleanedPostDocument,
     CleanedRepositoryDocument,
+    CleanedVideoDocument,
 )
 from domain.documents import (
     ArticleDocument,
     Document,
     PostDocument,
     RepositoryDocument,
+    VideoDocument,
 )
 
 from .operations import clean_text
@@ -60,6 +62,19 @@ class ArticleCleaningHandler(CleaningDataHandler):
 class RepositoryCleaningHandler(CleaningDataHandler):
     def clean(self, data_model: RepositoryDocument) -> CleanedRepositoryDocument:
         return CleanedRepositoryDocument(
+            id=data_model.id,
+            content=clean_text(" #### ".join(data_model.content.values())),
+            platform=data_model.platform,
+            name=data_model.name,
+            link=data_model.link,
+            author_id=data_model.author_id,
+            author_full_name=data_model.author_full_name,
+        )
+    
+# need to check on this
+class VideoCleaningHandler(CleaningDataHandler):
+    def clean(self, data_model: VideoDocument) -> CleanedVideoDocument:
+        return CleanedVideoDocument(
             id=data_model.id,
             content=clean_text(" #### ".join(data_model.content.values())),
             platform=data_model.platform,
