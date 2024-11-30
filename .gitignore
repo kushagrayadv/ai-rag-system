@@ -1,2 +1,4 @@
 .env
 ai_project
+.idea/
+**__pycache__**
