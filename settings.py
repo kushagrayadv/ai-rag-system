@@ -6,20 +6,20 @@ class Settings(BaseSettings):
   model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 
   # Huggingface API
-  HUGGINGFACE_ACCESS_TOKEN: str | None = "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"
+  HUGGINGFACE_ACCESS_TOKEN: str | None = ""
 
   DATASET_ID: str = "billa-man/ai-rag-system-dataset-large"
 
   # MongoDB database
-  DATABASE_HOST: str = "mongodb+srv://sb10225:yxLjqum1UUbjya0A@ai-rag-system-large.vzo38.mongodb.net/"
+  DATABASE_HOST: str = ""
   DATABASE_NAME: str = "rag-database-large"
 
   # Qdrant vector database
   USE_QDRANT_CLOUD: bool = True
   QDRANT_DATABASE_HOST: str = "localhost"
   QDRANT_DATABASE_PORT: int = 6333
-  QDRANT_CLOUD_URL: str = "https://46bc3ea1-a986-4097-bbd2-d1f39ae06eee.europe-west3-0.gcp.cloud.qdrant.io:6333"
-  QDRANT_APIKEY: str | None = "mfK7Aq6sEV-zwsM7ADKHYcpxGw9t-DgEf2VJoRe9TXHIpCRYqnbVbw"
+  QDRANT_CLOUD_URL: str = ""
+  QDRANT_APIKEY: str | None = ""
   # --- Optional settings used to tweak the code. ---
 
   OLLAMA_CLIENT_HOST: str = "http://localhost:11434"
@@ -35,7 +35,7 @@ class Settings(BaseSettings):
   OPENAI_MODEL_ID: str = "gpt-4o-mini"
 
   # sohith's token
-  OPENAI_API_KEY: str | None = "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"
+  OPENAI_API_KEY: str | None = ""
 
   @property
   def OPENAI_MAX_TOKEN_WINDOW(self) -> int:
