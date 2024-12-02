@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Generic, TypeVar, cast
 
-from app.networks import EmbeddingModelSingleton
+from application.networks import EmbeddingModelSingleton
 from domain.chunks import ArticleChunk, Chunk, PostChunk, RepositoryChunk, VideoChunk
 from domain.embedded_chunks import (
     EmbeddedArticleChunk,

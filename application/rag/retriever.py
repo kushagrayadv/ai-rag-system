@@ -4,7 +4,7 @@ from loguru import logger
 from qdrant_client.models import FieldCondition, Filter, MatchValue
 
 from .. import utils
-from app.preprocessing.dispatchers import EmbeddingDispatcher
+from application.preprocessing.dispatchers import EmbeddingDispatcher
 from domain.embedded_chunks import (
     EmbeddedArticleChunk,
     EmbeddedChunk,

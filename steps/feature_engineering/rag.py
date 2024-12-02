@@ -1,8 +1,8 @@
 from typing import List
 from clearml import Task
 
-from app import utils
-from app.preprocessing.dispatchers import ChunkingDispatcher, EmbeddingDispatcher
+from application import utils
+from application.preprocessing.dispatchers import ChunkingDispatcher, EmbeddingDispatcher
 from domain.chunks import Chunk
 from domain.embedded_chunks import EmbeddedChunk
 

@@ -2,7 +2,7 @@ from loguru import logger
 from clearml import Task
 from typing import Dict
 
-from app import utils
+from application import utils
 from domain.documents import UserDocument
 
 

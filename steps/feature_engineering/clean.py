@@ -1,7 +1,7 @@
 from typing import List
 from clearml import Task
 
-from app.preprocessing.dispatchers import CleaningDispatcher
+from application.preprocessing.dispatchers import CleaningDispatcher
 from domain.cleaned_documents import CleanedDocument
 
 

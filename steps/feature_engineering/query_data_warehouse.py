@@ -2,7 +2,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from loguru import logger
 from clearml import Task, Logger
 
-from app import utils
+from application import utils
 from domain.base.nosql import NoSQLBaseDocument
 from domain.documents import ArticleDocument, Document, PostDocument, RepositoryDocument, UserDocument, VideoDocument
 

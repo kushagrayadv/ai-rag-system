@@ -4,7 +4,7 @@ from loguru import logger
 from tqdm import tqdm
 from clearml import Task, Logger
 
-from app.crawlers.dispatcher import CrawlerDispatcher
+from application.crawlers.dispatcher import CrawlerDispatcher
 from domain.documents import UserDocument
 
 

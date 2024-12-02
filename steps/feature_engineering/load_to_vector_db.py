@@ -2,7 +2,7 @@ from loguru import logger
 from typing import List
 from clearml import Task, Logger
 
-from app import utils
+from application import utils
 from domain.base import VectorBaseDocument
 
 @Task.add_function
