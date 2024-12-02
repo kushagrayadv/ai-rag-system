@@ -1,4 +1,3 @@
-from clearml import Task
 from clearml.automation import PipelineController
 from steps.etl import crawl_links, get_or_create_user
 
