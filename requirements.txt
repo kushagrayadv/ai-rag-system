@@ -6,7 +6,6 @@ langchain
 langchain-openai
 selenium
 langchain-community
-urllib
 openai
 pydantic
 pydantic-settings
