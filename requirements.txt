@@ -17,3 +17,4 @@ chromedriver-autoinstaller
 pymongo
 huggingface-hub
 tqdm
+vllm
