@@ -18,3 +18,4 @@ pymongo
 huggingface-hub
 tqdm
 vllm
+bs4
