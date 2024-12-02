@@ -22,7 +22,7 @@ class Settings(BaseSettings):
 
     # MongoDB database
     DATABASE_HOST: str = "mongodb+srv://ky2684:RumKDdj92MsoOrr0@ai-rag-system.djb9j.mongodb.net/?retryWrites=true&w=majority&appName=ai-rag-system"
-    DATABASE_NAME: str = "twin"
+    DATABASE_NAME: str = "rag"
 
     # Qdrant vector database
     USE_QDRANT_CLOUD: bool = False
