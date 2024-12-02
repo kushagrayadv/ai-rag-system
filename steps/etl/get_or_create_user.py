@@ -6,8 +6,6 @@ from application import utils
 from domain.documents import UserDocument
 
 
-@Task.add_function_step(name="get_or_create_user", return_values=["user"])
-
 def get_or_create_user(user_full_name: str) -> UserDocument:
     logger.info(f"Getting or creating user: {user_full_name}")
 

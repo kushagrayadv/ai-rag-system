@@ -8,7 +8,7 @@ pipe = PipelineController(
 )
 
 pipe.add_parameter("user_full_name", "John Doe")
-pipe.add_parameter("links", ["https://example.com"])
+pipe.add_parameter("links", ["https://github.com/ros2/rcl"])
 
 pipe.add_function_step(
     name="get_or_create_user",
@@ -32,5 +32,5 @@ pipe.add_function_step(
 pipe.set_default_execution_queue("default")
 
 if __name__ == "__main__":
-    pipe.start()
+    pipe.start(queue="default")
     print(f"Pipeline started. Check the ClearML web UI for progress.")
