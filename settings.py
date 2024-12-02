@@ -25,11 +25,11 @@ class Settings(BaseSettings):
     DATABASE_NAME: str = "twin"
 
     # Qdrant vector database
-    USE_QDRANT_CLOUD: bool = False
+    USE_QDRANT_CLOUD: bool = True
     QDRANT_DATABASE_HOST: str = "localhost"
     QDRANT_DATABASE_PORT: int = 6333
-    QDRANT_CLOUD_URL: str = "str"
-    QDRANT_APIKEY: str | None = None
+    QDRANT_CLOUD_URL: str = "https://6f00fbd5-b1e3-424c-acad-8bd09a9c7090.us-west-1-0.aws.cloud.qdrant.io"
+    QDRANT_APIKEY: str | None = "nlCnn-CB1rZtpqFak_aAu5GQKLYkCKcLyOn3VItTaafqWn-BEY4DbA"
 
     # AWS Authentication
     AWS_REGION: str = "eu-central-1"
