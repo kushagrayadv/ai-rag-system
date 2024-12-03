@@ -9,9 +9,26 @@ from application.crawlers.dispatcher import CrawlerDispatcher
 from domain.documents import UserDocument
 
 
-def crawl_links(task_args: Dict) -> list[str]:
-    user: UserDocument = task_args['user']
-    links: list[str] = task_args['links']
+def crawl_links(user: UserDocument, links: list[str]) -> list[str]:
+
+    def _crawl_link(dispatcher: CrawlerDispatcher, link: str, user: UserDocument) -> tuple[bool, str]:
+        crawler = dispatcher.get_crawler(link)
+        crawler_domain = urlparse(link).netloc
+
+        try:
+            crawler.extract(link=link, user=user)
+            return True, crawler_domain
+        except Exception as e:
+            logger.error(f"An error occurred while crawling: {e!s}")
+            return False, crawler_domain
+
+
+    def _add_to_metadata(metadata: Dict, domain: str, successful_crawl: bool) -> dict:
+        if domain not in metadata:
+            metadata[domain] = {"successful": 0, "total": 0}
+        metadata[domain]["successful"] += int(successful_crawl)
+        metadata[domain]["total"] += 1
+        return metadata
 
     dispatcher = CrawlerDispatcher.build().register_github().register_youtube()
 
@@ -31,23 +48,3 @@ def crawl_links(task_args: Dict) -> list[str]:
     logger.info(f"Successfully crawled {successful_crawls} / {len(links)} links.")
 
     return links
-
-
-def _crawl_link(dispatcher: CrawlerDispatcher, link: str, user: UserDocument) -> tuple[bool, str]:
-    crawler = dispatcher.get_crawler(link)
-    crawler_domain = urlparse(link).netloc
-
-    try:
-        crawler.extract(link=link, user=user)
-        return True, crawler_domain
-    except Exception as e:
-        logger.error(f"An error occurred while crawling: {e!s}")
-        return False, crawler_domain
-
-
-def _add_to_metadata(metadata: dict, domain: str, successful_crawl: bool) -> dict:
-    if domain not in metadata:
-        metadata[domain] = {"successful": 0, "total": 0}
-    metadata[domain]["successful"] += int(successful_crawl)
-    metadata[domain]["total"] += 1
-    return metadata
