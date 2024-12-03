@@ -2,25 +2,16 @@ from typing import List
 from clearml import Task
 
 from application.preprocessing.dispatchers import CleaningDispatcher
+from domain.base import NoSQLBaseDocument
 from domain.cleaned_documents import CleanedDocument
 
 
-def clean_documents(documents: List[dict]) -> List[CleanedDocument]:
-    task = Task.init(project_name="Document Cleaning", task_name="Clean Documents")
-    logger = task.get_logger()
-
+def clean_documents(raw_documents: List[NoSQLBaseDocument]) -> List[CleanedDocument]:
     cleaned_documents = []
-    for document in documents:
+    for document in raw_documents:
         cleaned_document = CleaningDispatcher.dispatch(document)
         cleaned_documents.append(cleaned_document)
 
-    metadata = _get_metadata(cleaned_documents)
-    logger.report_table(title="Cleaned Documents Metadata", series="metadata", iteration=0, table_plot=metadata)
-
-    return cleaned_documents
-
-
-def _get_metadata(cleaned_documents: List[CleanedDocument]) -> dict:
     metadata = {"num_documents": len(cleaned_documents)}
     for document in cleaned_documents:
         category = document.get_category()
@@ -36,4 +27,7 @@ def _get_metadata(cleaned_documents: List[CleanedDocument]) -> dict:
         if isinstance(value, dict) and "authors" in value:
             value["authors"] = list(set(value["authors"]))
 
-    return metadata
+    task = Task.current_task()
+    task.upload_artifact("cleaned_documents", metadata)
+
+    return cleaned_documents

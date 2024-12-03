@@ -1,4 +1,5 @@
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from typing import List
 
 from clearml import Task
 from loguru import logger
@@ -8,8 +9,8 @@ from domain.base.nosql import NoSQLBaseDocument
 from domain.documents import Document, RepositoryDocument, UserDocument, VideoDocument
 
 
-def query_data_warehouse(author_full_names: list[str]) -> list:
-  def fetch_all_data(user: UserDocument) -> dict[str, list[NoSQLBaseDocument]]:
+def query_data_warehouse(author_full_names: List[str]) -> List[NoSQLBaseDocument]:
+  def fetch_all_data(user: UserDocument) -> dict[str, List[NoSQLBaseDocument]]:
     user_id = str(user.id)
     with ThreadPoolExecutor() as executor:
       future_to_query = {
@@ -28,13 +29,13 @@ def query_data_warehouse(author_full_names: list[str]) -> list:
 
     return results
 
-  def __fetch_repositories(user_id) -> list[NoSQLBaseDocument]:
+  def __fetch_repositories(user_id) -> List[NoSQLBaseDocument]:
     return RepositoryDocument.bulk_find(author_id=user_id)
 
-  def __fetch_videos(user_id) -> list[NoSQLBaseDocument]:
+  def __fetch_videos(user_id) -> List[NoSQLBaseDocument]:
     return VideoDocument.bulk_find(author_id=user_id)
 
-  def _get_metadata(documents: list[Document]) -> dict:
+  def _get_metadata(documents: List[Document]) -> dict:
     metadata = {
       "num_documents": len(documents),
     }
