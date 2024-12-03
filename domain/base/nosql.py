@@ -77,6 +77,9 @@ class NoSQLBaseDocument(BaseModel, Generic[T], ABC):
 
     @classmethod
     def get_or_create(cls: Type[T], **filter_options) -> T:
+        logger.info("connection: ", connection)
+        logger.info("database: ", _database)
+        logger.info("collection_name: ", cls.get_collection_name())
         collection = _database[cls.get_collection_name()]
         print("collection:", collection)
         logger.info("collection:", collection)
