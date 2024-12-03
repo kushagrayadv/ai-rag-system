@@ -17,7 +17,8 @@ pipe.add_function_step(
   function_kwargs=dict(user_full_name="${pipeline.user_full_name}"),
   function_return=["user"],
   cache_executed_step=True,
-  packages=[]
+  packages=[],
+  repo=None
 )
 
 pipe.add_function_step(
@@ -30,7 +31,8 @@ pipe.add_function_step(
   function_return=["invocation_id"],
   cache_executed_step=True,
   parents=["get_or_create_user"],
-  packages=[]
+  packages=[],
+  repo=None
 )
 
 pipe.set_default_execution_queue("default")
