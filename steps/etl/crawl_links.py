@@ -1,5 +1,6 @@
 from typing import Dict, List
 from urllib.parse import urlparse
+import json
 
 from clearml import Task
 from loguru import logger
@@ -10,16 +11,12 @@ from domain.documents import UserDocument
 
 
 def crawl_links(user: UserDocument, links: List[str]) -> List[str]:
+  
+  links = json.loads(links)
+
   def _crawl_link(dispatcher: CrawlerDispatcher, link: str, user: UserDocument) -> tuple[bool, str]:
     crawler = dispatcher.get_crawler(link)
     crawler_domain = urlparse(link).netloc
-
-    try:
-      crawler.extract(link=link, user=user)
-      return True, crawler_domain
-    except Exception as e:
-      logger.error(f"An error occurred while crawling: {e!s}")
-      return False, crawler_domain
 
   def _add_to_metadata(metadata: Dict, domain: str, successful_crawl: bool) -> dict:
     if domain not in metadata:

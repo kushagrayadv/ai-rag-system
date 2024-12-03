@@ -22,15 +22,15 @@ class Settings(BaseSettings):
   # --- Otherwise, default values work fine. ---
 
   # MongoDB database
-  DATABASE_HOST: str = "mongodb+srv://ky2684:RumKDdj92MsoOrr0@ai-rag-system.djb9j.mongodb.net/?retryWrites=true&w=majority&appName=ai-rag-system"
+  DATABASE_HOST: str = "mongodb+srv://sohithbandari:Zjq1L1owGRbASeEw@csgy-6613-project-kysb.b7rso.mongodb.net/?retryWrites=true&w=majority&appName=csgy-6613-project-kysb"
   DATABASE_NAME: str = "rag"
 
   # Qdrant vector database
-  USE_QDRANT_CLOUD: bool = False
+  USE_QDRANT_CLOUD: bool = True
   QDRANT_DATABASE_HOST: str = "localhost"
   QDRANT_DATABASE_PORT: int = 6333
-  QDRANT_CLOUD_URL: str = "str"
-  QDRANT_APIKEY: str | None = None
+  QDRANT_CLOUD_URL: str = "https://6f00fbd5-b1e3-424c-acad-8bd09a9c7090.us-west-1-0.aws.cloud.qdrant.io:6333"
+  QDRANT_APIKEY: str | None = "apgKddFp_XPkbVREmxGetfqhvqI4ivjrBva9bJMG7FH4g0OpzOdoBg"
 
   # AWS Authentication
   AWS_REGION: str = "eu-central-1"
@@ -61,10 +61,6 @@ class Settings(BaseSettings):
   TEXT_EMBEDDING_MODEL_ID: str = "sentence-transformers/all-MiniLM-L6-v2"
   RERANKING_CROSS_ENCODER_MODEL_ID: str = "cross-encoder/ms-marco-MiniLM-L-4-v2"
   RAG_MODEL_DEVICE: str = "cpu"
-
-  # LinkedIn Credentials
-  LINKEDIN_USERNAME: str | None = None
-  LINKEDIN_PASSWORD: str | None = None
 
   @property
   def OPENAI_MAX_TOKEN_WINDOW(self) -> int:
