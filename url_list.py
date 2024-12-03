@@ -38,8 +38,25 @@ crawl_urls = [
 
   # movit2
     # github
-
+    "https://github.com/moveit/moveit2",
+    "https://github.com/moveit/moveit2_tutorials",
+    "https://github.com/moveit/moveit_task_constructor",
+    "https://github.com/moveit/moveit_visual_tools",
+    "https://github.com/moveit/moveit_msgs",
+    "https://github.com/moveit/moveit_resources",
+    "https://github.com/moveit/moveit_drake",
+    "https://github.com/moveit/moveit_middleware_benchmark",
 
 
   # gazebo
+    # github
+    "https://github.com/gazebosim/gz-sim",
+    "https://github.com/gazebosim/gz-math",
+    "https://github.com/gazebosim/gz-plugin",
+    "https://github.com/gazebosim/gz-gui",
+    "https://github.com/gazebosim/gz-tools",
+    "https://github.com/gazebosim/gz-cmake",
+    "https://github.com/gazebosim/gz-fuel-tools",
+    "https://github.com/gazebosim/ros_gz",
+    "https://github.com/gazebosim/sdformat",
 ]
