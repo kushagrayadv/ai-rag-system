@@ -5,7 +5,9 @@ from steps.etl import crawl_links, get_or_create_user
 pipe = PipelineController(
   name="digital_data_etl",
   project="ai_rag_system",
-  version="1.0.0"
+  version="1.0.0",
+  packages=[""],
+  repo=""
 )
 
 pipe.add_parameter("user_full_name", "John Doe")
@@ -17,8 +19,7 @@ pipe.add_function_step(
   function_kwargs=dict(user_full_name="${pipeline.user_full_name}"),
   function_return=["user"],
   cache_executed_step=True,
-  packages=[],
-  repo=None
+
 )
 
 pipe.add_function_step(
@@ -31,8 +32,6 @@ pipe.add_function_step(
   function_return=["invocation_id"],
   cache_executed_step=True,
   parents=["get_or_create_user"],
-  packages=[],
-  repo=None
 )
 
 pipe.set_default_execution_queue("default")
