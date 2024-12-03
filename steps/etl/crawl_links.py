@@ -1,9 +1,9 @@
 from typing import Dict
 from urllib.parse import urlparse
 
+from clearml import Task
 from loguru import logger
 from tqdm import tqdm
-from clearml import Task, Logger
 
 from application.crawlers.dispatcher import CrawlerDispatcher
 from domain.documents import UserDocument
@@ -12,9 +12,6 @@ from domain.documents import UserDocument
 def crawl_links(task_args: Dict) -> list[str]:
     user: UserDocument = task_args['user']
     links: list[str] = task_args['links']
-    task = Task.init(project_name="Link Crawling", task_name="Crawl Links")
-    task.connect(links)
-    task.connect(user)
 
     dispatcher = CrawlerDispatcher.build().register_github().register_youtube()
 
@@ -28,12 +25,8 @@ def crawl_links(task_args: Dict) -> list[str]:
 
         metadata = _add_to_metadata(metadata, crawled_domain, successful_crawl)
 
-    Logger.current_logger().report_table(
-        title="Crawl Results",
-        series="domain_stats",
-        iteration=0,
-        table_plot=metadata
-    )
+    task = Task.current_task()
+    task.upload_artifact("crawled_links", metadata)
 
     logger.info(f"Successfully crawled {successful_crawls} / {len(links)} links.")
 
