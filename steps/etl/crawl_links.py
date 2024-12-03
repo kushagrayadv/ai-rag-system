@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, List
 from urllib.parse import urlparse
 
 from clearml import Task
@@ -9,7 +9,7 @@ from application.crawlers.dispatcher import CrawlerDispatcher
 from domain.documents import UserDocument
 
 
-def crawl_links(user: UserDocument, links: list[str]) -> list[str]:
+def crawl_links(user: UserDocument, links: List[str]) -> List[str]:
 
     def _crawl_link(dispatcher: CrawlerDispatcher, link: str, user: UserDocument) -> tuple[bool, str]:
         crawler = dispatcher.get_crawler(link)
