@@ -26,6 +26,7 @@ def get_or_create_user(user_full_name: str) -> UserDocument:
     user = UserDocument.get_or_create(first_name=first_name, last_name=last_name)
 
     task = Task.current_task()
-    task.upload_artifact("user_metadata", _get_metadata(user_full_name, user))
+    metadata = _get_metadata(user_full_name, user)
+    task.upload_artifact("user_metadata", metadata)
 
     return user
