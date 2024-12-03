@@ -43,4 +43,4 @@ pipe.set_default_execution_queue("default")
 
 if __name__ == "__main__":
   pipe.start_locally(run_pipeline_steps_locally=True)
-  print(f"Pipeline started. Check the ClearML web UI for progress.")
+  print(f"Data ETL pipeline started...")
