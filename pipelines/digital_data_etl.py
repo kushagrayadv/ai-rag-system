@@ -26,7 +26,8 @@ pipe.add_function_step(
         links="${pipeline.links}"
     ),
     function_return=["invocation_id"],
-    cache_executed_step=True
+    cache_executed_step=True,
+    parents=["get_or_create_user"]
 )
 
 pipe.set_default_execution_queue("default")
