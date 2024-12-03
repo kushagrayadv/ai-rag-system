@@ -83,7 +83,7 @@ class NoSQLBaseDocument(BaseModel, Generic[T], ABC):
         try:
             instance = collection.find_one(filter_options)
             print("instance:", instance)
-            logger.infoprint("instance:", instance)
+            logger.info("instance:", instance)
             if instance:
                 return cls.from_mongo(instance)
 
