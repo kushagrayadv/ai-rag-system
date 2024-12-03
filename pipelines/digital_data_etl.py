@@ -1,6 +1,5 @@
 from clearml.automation import PipelineController
 
-import settings
 from steps.etl import crawl_links, get_or_create_user
 
 pipe = PipelineController(
@@ -11,6 +10,11 @@ pipe = PipelineController(
   repo=""
 )
 
+CRAWL_LINKS = [
+  "https://github.com/ros2/rcl",
+  "https://github.com/ros2/rcl",
+  "https://github.com/ros2/rcl"
+]
 
 pipe.add_parameter("user_full_name", "Admin User")
 
@@ -28,7 +32,7 @@ pipe.add_function_step(
   function=crawl_links,
   function_kwargs=dict(
     user="${get_or_create_user.user}",
-    links=settings.Settings.CRAWL_LINKS
+    links=CRAWL_LINKS
   ),
   function_return=["invocation_id"],
   cache_executed_step=True,

@@ -79,11 +79,5 @@ class Settings(BaseSettings):
 
     return max_token_window
 
-  CRAWL_LINKS = [
-    "https://github.com/ros2/rcl",
-    "https://github.com/ros2/rcl",
-    "https://github.com/ros2/rcl"
-  ]
-
 
 settings = Settings()
