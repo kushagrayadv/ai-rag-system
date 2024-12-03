@@ -6,7 +6,8 @@ from application import utils
 from domain.documents import UserDocument
 
 
-def get_or_create_user(user_full_name: str) -> UserDocument:
+def get_or_create_user(task_args: Dict) -> UserDocument:
+    user_full_name = task_args['user_full_name']
     logger.info(f"Getting or creating user: {user_full_name}")
 
     first_name, last_name = utils.split_user_full_name(user_full_name)

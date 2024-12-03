@@ -1,3 +1,4 @@
+from typing import Dict
 from urllib.parse import urlparse
 
 from loguru import logger
@@ -8,7 +9,9 @@ from application.crawlers.dispatcher import CrawlerDispatcher
 from domain.documents import UserDocument
 
 
-def crawl_links(user: UserDocument, links: list[str]) -> list[str]:
+def crawl_links(task_args: Dict) -> list[str]:
+    user: UserDocument = task_args['user']
+    links: list[str] = task_args['links']
     task = Task.init(project_name="Link Crawling", task_name="Crawl Links")
     task.connect(links)
     task.connect(user)
