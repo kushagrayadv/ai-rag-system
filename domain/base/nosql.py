@@ -78,12 +78,18 @@ class NoSQLBaseDocument(BaseModel, Generic[T], ABC):
     @classmethod
     def get_or_create(cls: Type[T], **filter_options) -> T:
         collection = _database[cls.get_collection_name()]
+        print("collection:", collection)
+        logger.info("collection:", collection)
         try:
             instance = collection.find_one(filter_options)
+            print("instance:", instance)
+            logger.info("instance:", instance)
             if instance:
                 return cls.from_mongo(instance)
 
             new_instance = cls(**filter_options)
+            print("new instance", new_instance)
+            logger.info("new instance", new_instance)
             new_instance = new_instance.save()
 
             return new_instance

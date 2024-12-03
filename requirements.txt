@@ -19,4 +19,3 @@ huggingface-hub
 tqdm
 vllm
 bs4
-clearml-agent
