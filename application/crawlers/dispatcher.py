@@ -35,6 +35,7 @@ class CrawlerDispatcher:
         self._crawlers[r"https://(www\.)?{}/*".format(re.escape(domain))] = crawler
 
     def get_crawler(self, url: str) -> BaseCrawler:
+        print("BaseCrawler:", url)
         for pattern, crawler in self._crawlers.items():
             if re.match(pattern, url):
                 return crawler()
