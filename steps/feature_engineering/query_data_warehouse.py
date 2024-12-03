@@ -72,6 +72,6 @@ def query_data_warehouse(author_full_names: List[str]) -> List[NoSQLBaseDocument
 
   metadata = _get_metadata(documents)
   task = Task.current_task()
-  task.upload_artifact("user_documents", metadata)
+  task.upload_artifact("user_documents", documents, metadata=metadata)
 
   return documents

@@ -54,7 +54,7 @@ def feature_engineering(author_full_names, wait_for=None):
   # Start the pipeline
   controller.start_locally(run_pipeline_steps_locally=True)
 
-  return [last_step_1.invocation_id, last_step_2.invocation_id]
+  return [last_step_1, last_step_2]
 
 
 if __name__ == "__main__":

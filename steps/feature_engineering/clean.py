@@ -29,6 +29,6 @@ def clean_documents(raw_documents: List[NoSQLBaseDocument]) -> List[CleanedDocum
       value["authors"] = list(set(value["authors"]))
 
   task = Task.current_task()
-  task.upload_artifact("cleaned_documents", metadata)
+  task.upload_artifact("cleaned_documents", cleaned_documents, metadata=metadata)
 
   return cleaned_documents
