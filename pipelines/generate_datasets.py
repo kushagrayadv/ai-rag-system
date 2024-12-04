@@ -31,12 +31,22 @@ def generate_datasets(
     function_return=['prompts']
   )
 
-  pipeline.add_function_step(
-    name='generate_instruction_dataset',
-    function=cd_steps.generate_instruction_dataset,
-    function_kwargs=dict(prompts='${create_prompts.prompts}', test_split_size=test_split_size, mock=mock),
-    function_return=['dataset']
-  )
+  if dataset_type == DatasetType.INSTRUCTION:
+    pipeline.add_function_step(
+      name='generate_instruction_dataset',
+      function=cd_steps.generate_instruction_dataset,
+      function_kwargs=dict(prompts='${create_prompts.prompts}', test_split_size=test_split_size, mock=mock),
+      function_return=['dataset']
+    )
+  elif dataset_type == DatasetType.PREFERENCE:
+    pipeline.add_function_step(
+      name='generate_preference_dataset',
+      function=cd_steps.generate_preference_dataset,
+      function_kwargs=dict(prompts='${create_prompts.prompts}', test_split_size=test_split_size, mock=mock),
+      function_return=['dataset']
+    )
+  else:
+    raise ValueError(f"Invalid dataset type: {dataset_type}")
 
   if push_to_huggingface:
     pipeline.add_function_step(
