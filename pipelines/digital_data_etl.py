@@ -1,6 +1,4 @@
 from clearml.automation import PipelineController
-import json
-
 from steps.etl import crawl_links, get_or_create_user
 from url_list import crawl_urls
 

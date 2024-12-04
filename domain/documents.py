@@ -48,13 +48,15 @@ class ArticleDocument(Document):
     class Settings:
         name = DataCategory.ARTICLES
 
-class VideoDocument(NoSQLBaseDocument):
+class VideoDocument(Document):
     name: str
     link: str
+    video_author: str
     description: Optional[str] = None
-    views: Optional[int] = None
-    likes: Optional[int] = None
+    tags: Optional[str] = None
+    categories: Optional[str] = None
     transcript: Optional[str] = None
+    chapters: Optional[str] = None
 
     class Settings:
         name = DataCategory.VIDEOS

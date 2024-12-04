@@ -60,10 +60,12 @@ class EmbeddedRepositoryChunk(EmbeddedChunk):
 class EmbeddedVideoChunk(EmbeddedChunk):
     name: str
     link: str
+    video_author: str
     description: Optional[str] = None
-    views: Optional[int] = None
-    likes: Optional[int] = None
+    tags: Optional[str] = None
+    categories: Optional[str] = None
     transcript: Optional[str] = None
+    chapters: Optional[str] = None
 
     class Config:
         name = "embedded_videos"

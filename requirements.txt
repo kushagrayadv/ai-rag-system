@@ -19,3 +19,5 @@ huggingface-hub
 tqdm
 vllm
 bs4
+yt-dlp
+youtube-transcript-api
