@@ -58,5 +58,5 @@ def feature_engineering(author_full_names, wait_for=None):
 
 
 if __name__ == "__main__":
-  feature_engineering("Admin User")
   print(f"Feature engineering pipeline started...")
+  feature_engineering("Admin User")

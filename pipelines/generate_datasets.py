@@ -45,6 +45,9 @@ def generate_datasets(
       function_kwargs=dict(dataset='${generate_instruction_dataset.dataset}', dataset_id=dataset_id),
     )
 
+  pipeline.start_locally(run_pipeline_steps_locally=True)
+
 
 if __name__ == "__main__":
+  print(f"Dataset generation pipeline started...")
   generate_datasets(push_to_huggingface=True, dataset_id=Settings.DATASET_ID)
