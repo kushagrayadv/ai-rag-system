@@ -21,3 +21,7 @@ vllm
 bs4
 yt-dlp
 youtube-transcript-api
+typing_extensions
+scikit-learn
+tiktoken
+langchain-core

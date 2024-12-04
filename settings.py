@@ -14,6 +14,8 @@ class Settings(BaseSettings):
   # Huggingface API
   HUGGINGFACE_ACCESS_TOKEN: str | None = None
 
+  DATASET_ID: str = 'kushagrayadv/ai-rag-system-dataset'
+
   # Comet ML (during training)
   COMET_API_KEY: str | None = None
   COMET_PROJECT: str = "twin"
