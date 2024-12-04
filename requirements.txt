@@ -25,5 +25,5 @@ typing_extensions
 scikit-learn
 tiktoken
 langchain-core
-unsloth
 trl
+# unsloth[cu124-torch250] @ git+https://github.com/unslothai/unsloth.git

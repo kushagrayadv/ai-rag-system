@@ -36,5 +36,6 @@ pipe.add_function_step(
 pipe.set_default_execution_queue("default")
 
 if __name__ == "__main__":
-  pipe.start_locally(run_pipeline_steps_locally=True)
   print(f"Data ETL pipeline started...")
+  pipe.start_locally(run_pipeline_steps_locally=True)
+  print(f"Data ETL pipeline ended...")

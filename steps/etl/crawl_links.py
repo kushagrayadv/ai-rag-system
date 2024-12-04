@@ -12,8 +12,6 @@ from domain.documents import UserDocument
 
 def crawl_links(user: UserDocument, links: List[str]) -> List[str]:
 
-    links = json.loads(links)
-
     def _crawl_link(dispatcher: CrawlerDispatcher, link: str, user: UserDocument) -> tuple[bool, str]:
         crawler = dispatcher.get_crawler(link)
         crawler_domain = urlparse(link).netloc
@@ -33,6 +31,7 @@ def crawl_links(user: UserDocument, links: List[str]) -> List[str]:
         metadata[domain]["total"] += 1
         return metadata
 
+    links = json.loads(links)
     dispatcher = CrawlerDispatcher.build().register_github().register_youtube()
 
     logger.info(f"Starting to crawl {len(links)} link(s).")
@@ -49,5 +48,6 @@ def crawl_links(user: UserDocument, links: List[str]) -> List[str]:
     task.upload_artifact("crawled_links", metadata)
 
     logger.info(f"Successfully crawled {successful_crawls} / {len(links)} links.")
+    print(links)
 
     return links
