@@ -3,7 +3,7 @@ from clearml import PipelineController
 from steps import feature_engineering as fe_steps
 
 
-def feature_engineering(author_full_names, wait_for=None):
+def feature_engineering(author_full_names):
   # Create a pipeline controller for executing steps
   controller = PipelineController(name="feature_engineering",
                                   project="ai_rag_system",
@@ -15,7 +15,7 @@ def feature_engineering(author_full_names, wait_for=None):
   controller.add_function_step(
     name='query_data_warehouse',
     function=fe_steps.query_data_warehouse,
-    function_kwargs=dict(author_full_names=author_full_names, after=wait_for),
+    function_kwargs=dict(author_full_names=author_full_names),
     function_return=['raw_documents']
   )
 
@@ -59,4 +59,4 @@ def feature_engineering(author_full_names, wait_for=None):
 
 if __name__ == "__main__":
   print(f"Feature engineering pipeline started...")
-  feature_engineering("Admin User")
+  feature_engineering(list("Admin User"))

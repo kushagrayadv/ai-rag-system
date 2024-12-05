@@ -24,6 +24,10 @@ crawl_urls = [
     "https://github.com/ros2/tinyxml2_vendor",
     "https://github.com/ros2/ros2_documentation",
 
+    # youtube
+    "https://www.youtube.com/watch?v=Gg25GfA456o",
+    "https://www.youtube.com/watch?v=c5DRTN2b2kY",
+
   # nav2
     # github
     "https://github.com/ros-navigation/navigation2",

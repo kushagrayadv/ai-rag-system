@@ -1,6 +1,6 @@
 from pydantic import UUID4, Field
 
-from base import VectorBaseDocument
+from .base import VectorBaseDocument
 from .types import DataCategory
 
 
