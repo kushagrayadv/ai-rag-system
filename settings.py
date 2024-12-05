@@ -12,7 +12,7 @@ class Settings(BaseSettings):
   OPENAI_API_KEY: str | None = None
 
   # Huggingface API
-  HUGGINGFACE_ACCESS_TOKEN: str | None = None
+  HUGGINGFACE_ACCESS_TOKEN: str | None = "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"
 
   DATASET_ID: str = 'kushagrayadv/ai-rag-system-dataset'
 
