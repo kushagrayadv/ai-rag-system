@@ -28,7 +28,8 @@ def generate_datasets(
     name='create_prompts',
     function=cd_steps.create_prompts,
     function_kwargs=dict(documents='${query_feature_store.cleaned_documents}', dataset_type=dataset_type),
-    function_return=['prompts']
+    function_return=['prompts'],
+    parents=["query_feature_store"]
   )
 
   if dataset_type == DatasetType.INSTRUCTION:
@@ -36,23 +37,28 @@ def generate_datasets(
       name='generate_instruction_dataset',
       function=cd_steps.generate_instruction_dataset,
       function_kwargs=dict(prompts='${create_prompts.prompts}', test_split_size=test_split_size, mock=mock),
-      function_return=['dataset']
+      function_return=['dataset'],
+      parents=["create_prompts"]
     )
   elif dataset_type == DatasetType.PREFERENCE:
     pipeline.add_function_step(
       name='generate_preference_dataset',
       function=cd_steps.generate_preference_dataset,
       function_kwargs=dict(prompts='${create_prompts.prompts}', test_split_size=test_split_size, mock=mock),
-      function_return=['dataset']
+      function_return=['dataset'],
+      parents=["create_prompts"]
     )
   else:
     raise ValueError(f"Invalid dataset type: {dataset_type}")
 
   if push_to_huggingface:
+    dataset = '${generate_instruction_dataset.dataset}' if dataset_type == DatasetType.INSTRUCTION else '${generate_preference_dataset.dataset}'
+    parent = "generate_instruction_dataset" if dataset_type == DatasetType.INSTRUCTION else "generate_preference_dataset"
     pipeline.add_function_step(
       name='push_to_huggingface',
       function=cd_steps.push_to_huggingface,
-      function_kwargs=dict(dataset='${generate_instruction_dataset.dataset}', dataset_id=dataset_id),
+      function_kwargs=dict(dataset=dataset, dataset_id=dataset_id),
+      parents=[parent]
     )
 
   pipeline.start_locally(run_pipeline_steps_locally=True)
