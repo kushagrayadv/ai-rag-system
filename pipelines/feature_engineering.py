@@ -24,7 +24,8 @@ def feature_engineering(author_full_names):
     name='clean_documents',
     function=fe_steps.clean_documents,
     function_kwargs=dict(raw_documents='${query_data_warehouse.raw_documents}'),
-    function_return=['cleaned_documents']
+    function_return=['cleaned_documents'],
+    parents=["query_data_warehouse"]
   )
 
   # Step 3: Load to vector DB
@@ -32,7 +33,8 @@ def feature_engineering(author_full_names):
     name='load_to_vector_db_1',
     function=fe_steps.load_to_vector_db,
     function_kwargs=dict(documents='${clean_documents.cleaned_documents}'),
-    function_return=['invocation_id']
+    function_return=['invocation_id'],
+    parents= ["clean_documents"]
   )
 
   # Step 4: Chunk and embed
@@ -40,7 +42,8 @@ def feature_engineering(author_full_names):
     name='chunk_and_embed',
     function=fe_steps.chunk_and_embed,
     function_kwargs=dict(documents='${clean_documents.cleaned_documents}'),
-    function_return=['embedded_documents']
+    function_return=['embedded_documents'],
+    parents=["clean_documents"]
   )
 
   # Step 5: Load to vector DB
@@ -48,7 +51,8 @@ def feature_engineering(author_full_names):
     name='load_to_vector_db_2',
     function=fe_steps.load_to_vector_db,
     function_kwargs=dict(documents='${chunk_and_embed.embedded_documents}'),
-    function_return=['invocation_id']
+    function_return=['upload_successful'],
+    parents=["chunk_and_embed"]
   )
 
   # Start the pipeline
