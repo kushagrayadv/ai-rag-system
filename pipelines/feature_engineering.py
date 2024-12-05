@@ -40,7 +40,7 @@ def feature_engineering(author_full_names):
   controller.add_function_step(
     name='chunk_and_embed',
     function=fe_steps.chunk_and_embed,
-    function_kwargs=dict(documents='${clean_documents.cleaned_documents}'),
+    function_kwargs=dict(cleaned_documents='${clean_documents.cleaned_documents}'),
     function_return=['embedded_documents'],
     parents=["clean_documents"]
   )

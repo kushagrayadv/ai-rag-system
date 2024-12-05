@@ -124,7 +124,6 @@ class VideoEmbeddingHandler(EmbeddingDataHandler):
             platform=data_model.platform,
             name=data_model.name,
             link=data_model.link,
-            video_author=data_model.video_author,
             document_id=data_model.document_id,
             author_id=data_model.author_id,
             author_full_name=data_model.author_full_name,

@@ -162,14 +162,6 @@ class VideoChunkingHandler(ChunkingDataHandler):
                 document_id=data_model.id,
                 author_id=data_model.author_id,
                 author_full_name=data_model.author_full_name,
-
-                video_author=data_model.video_author,
-                description=data_model.description,
-                categories=data_model.categories,
-                transcript=data_model.transcript,
-                tags=data_model.tags,
-                chapters=data_model.chapters,
-
                 metadata=self.metadata,
             )
             data_models_list.append(model)

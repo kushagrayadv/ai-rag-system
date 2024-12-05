@@ -18,7 +18,6 @@ pipe.add_function_step(
   function=get_or_create_user,
   function_kwargs=dict(user_full_name="${pipeline.user_full_name}"),
   function_return=["user"],
-  cache_executed_step=True,
 )
 
 pipe.add_function_step(
@@ -29,7 +28,6 @@ pipe.add_function_step(
     links="${pipeline.links}",
   ),
   function_return=["invocation_id"],
-  cache_executed_step=True,
   parents=["get_or_create_user"],
 )
 
