@@ -1,5 +1,6 @@
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import List
+import json
 
 from clearml import Task
 from loguru import logger
@@ -57,6 +58,8 @@ def query_data_warehouse(author_full_names: List[str]) -> List[NoSQLBaseDocument
 
   documents = []
   authors = []
+  print(author_full_names)
+  print(type(author_full_names))
   for author_full_name in author_full_names:
     logger.info(f"Querying data warehouse for user: {author_full_name}")
 

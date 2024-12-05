@@ -1,5 +1,4 @@
 from clearml import PipelineController
-
 from steps import feature_engineering as fe_steps
 
 
@@ -63,4 +62,4 @@ def feature_engineering(author_full_names):
 
 if __name__ == "__main__":
   print(f"Feature engineering pipeline started...")
-  feature_engineering(list("Admin User"))
+  feature_engineering(["Admin User"])
