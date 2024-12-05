@@ -12,7 +12,7 @@ def generate_datasets(
   dataset_id: str | None = None,
   mock: bool = False,
 ) -> None:
-  pipeline = PipelineController(name="feature_engineering",
+  pipeline = PipelineController(name="generate_datasets",
                                 project="ai_rag_system",
                                 version="1.0.0",
                                 packages=[""],
