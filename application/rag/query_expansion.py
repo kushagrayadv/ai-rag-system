@@ -4,8 +4,8 @@ from loguru import logger
 from domain.queries import Query
 from settings import settings
 
-from base import RAGStep
-from prompt_templates import QueryExpansionTemplate
+from .base import RAGStep
+from .prompt_templates import QueryExpansionTemplate
 
 
 class QueryExpansion(RAGStep):
