@@ -9,12 +9,12 @@ class Settings(BaseSettings):
 
   # OpenAI API
   OPENAI_MODEL_ID: str = "gpt-4o-mini"
-  OPENAI_API_KEY: str | None = None
+  OPENAI_API_KEY: str | None = "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"
 
   # Huggingface API
   HUGGINGFACE_ACCESS_TOKEN: str | None = "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"
 
-  DATASET_ID: str = 'kushagrayadv/ai-rag-system-dataset'
+  DATASET_ID: str = "billa-man/ai_rag_system_dataset"
 
   # Comet ML (during training)
   COMET_API_KEY: str | None = None

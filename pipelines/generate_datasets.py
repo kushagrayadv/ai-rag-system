@@ -1,7 +1,7 @@
 from clearml import PipelineController
 
 from domain.dataset import DatasetType
-from settings import Settings
+from settings import settings
 from steps import generate_datasets as cd_steps
 
 
@@ -66,4 +66,4 @@ def generate_datasets(
 
 if __name__ == "__main__":
   print(f"Dataset generation pipeline started...")
-  generate_datasets(push_to_huggingface=True, dataset_id=Settings.DATASET_ID)
+  generate_datasets(push_to_huggingface=True, dataset_id=settings.DATASET_ID)
