@@ -14,7 +14,7 @@ class Settings(BaseSettings):
   # Huggingface API
   HUGGINGFACE_ACCESS_TOKEN: str | None = "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"
 
-  DATASET_ID: str = "billa-man/ai_rag_system_dataset"
+  DATASET_ID: str = "billa-man/ai-rag-system-dataset-large"
 
   # Comet ML (during training)
   COMET_API_KEY: str | None = None
@@ -24,15 +24,15 @@ class Settings(BaseSettings):
   # --- Otherwise, default values work fine. ---
 
   # MongoDB database
-  DATABASE_HOST: str = "mongodb+srv://sohithbandari:Zjq1L1owGRbASeEw@csgy-6613-project-kysb.b7rso.mongodb.net/?retryWrites=true&w=majority&appName=csgy-6613-project-kysb"
-  DATABASE_NAME: str = "rag"
+  DATABASE_HOST: str = "mongodb+srv://sb10225:yxLjqum1UUbjya0A@ai-rag-system-large.vzo38.mongodb.net/"
+  DATABASE_NAME: str = "rag-database-large"
 
   # Qdrant vector database
   USE_QDRANT_CLOUD: bool = True
   QDRANT_DATABASE_HOST: str = "localhost"
   QDRANT_DATABASE_PORT: int = 6333
-  QDRANT_CLOUD_URL: str = "https://6f00fbd5-b1e3-424c-acad-8bd09a9c7090.us-west-1-0.aws.cloud.qdrant.io:6333"
-  QDRANT_APIKEY: str | None = "apgKddFp_XPkbVREmxGetfqhvqI4ivjrBva9bJMG7FH4g0OpzOdoBg"
+  QDRANT_CLOUD_URL: str = "https://46bc3ea1-a986-4097-bbd2-d1f39ae06eee.europe-west3-0.gcp.cloud.qdrant.io:6333"
+  QDRANT_APIKEY: str | None = "mfK7Aq6sEV-zwsM7ADKHYcpxGw9t-DgEf2VJoRe9TXHIpCRYqnbVbw"
 
   # AWS Authentication
   AWS_REGION: str = "eu-central-1"

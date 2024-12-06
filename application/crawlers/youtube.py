@@ -31,13 +31,11 @@ class YouTubeCrawler(BaseSeleniumCrawler):
 
             ydl_opts = {"quiet": True, "skip_download": True}
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-                print("with block")
                 video_info = ydl.extract_info(link, download=False)
 
             transcript = YouTubeTranscriptApi.get_transcript(video_id)
             transcript_text = ' '.join([entry['text'] for entry in transcript])
-
-            print("before video_content")
+            
             video_content = {}
 
             video_content['title'] = video_info['title']
@@ -46,8 +44,6 @@ class YouTubeCrawler(BaseSeleniumCrawler):
             video_content['tags'] = ', '.join(video_info['tags'])
             video_content['categories'] = ', '.join(video_info['categories'])
             video_content['transcript'] = transcript_text
-
-            print("after video_content")
 
             user = kwargs["user"]
             instance = self.model(
