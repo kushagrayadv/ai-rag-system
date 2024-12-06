@@ -9,7 +9,7 @@ class Settings(BaseSettings):
 
   # OpenAI API
   OPENAI_MODEL_ID: str = "gpt-4o-mini"
-  OPENAI_API_KEY: str | None = "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"
+  OPENAI_API_KEY: str | None = "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"
 
   # Huggingface API
   HUGGINGFACE_ACCESS_TOKEN: str | None = "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"
