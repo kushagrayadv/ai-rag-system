@@ -169,18 +169,34 @@ Provide your response in JSON format.
 class InstructionDatasetGenerator(DatasetGenerator):
   dataset_type = DatasetType.INSTRUCTION
 
-  prompt_template_str = """Based on the following extract, generate five instruction-answer pairs. Each instruction \
+  prompt_template_str = """Based on the following extracts, generate five instruction-answer pairs. Each instruction \
 must ask to write about a specific topic contained in the context. Each answer \
 must provide a relevant paragraph based on the information found in the \
 context. Only use concepts from the context to generate the instructions. \
 Instructions must never explicitly mention a context, a system, a course, or an extract. \
 Instructions must be self-contained and general. \
+Topics must only be from ros2, nav2, movit2 and gazebo domain only. \
 Answers must imitate the writing style of the context. \
     
-Example instruction: Explain the concept of an LLM Twin. \
-Example answer: An LLM Twin is essentially an AI character that mimics your writing style, personality, and voice. \
-It's designed to write just like you by incorporating these elements into a language model. \
-The idea is to create a digital replica of your writing habits using advanced AI techniques. \
+Example instruction: Explain the concept of a ROS2 Twin. \
+Example answer: A ROS2 Twin is essentially a digital replica of a robotic system's behavior, state, and interactions. \
+It mimics the real robot's operations within a simulated environment, allowing developers to test, monitor, and optimize without physical hardware. \
+The idea is to create a virtual counterpart of the robot using ROS2 tools, like Gazebo for simulation and Nav2 for navigation, to mirror its real-world actions. \
+
+Example instruction: How does Nav2 help robots navigate autonomously? \
+Example answer: Nav2, or Navigation2, is a ROS2 framework that enables autonomous robot navigation. \
+It helps robots plan paths, avoid obstacles, and reach destinations in dynamic environments. \
+The framework integrates algorithms and sensor data to ensure safe and efficient movement from one point to another. \
+
+Example instruction: What is MoveIt2, and why is it important for robotic arms? \
+Example answer: MoveIt2 is a motion planning library in ROS2 specifically designed for manipulators like robotic arms. \
+It simplifies tasks such as calculating kinematics, avoiding collisions, and optimizing trajectories for precise movements. \
+This makes it crucial for applications like pick-and-place operations in industrial and research settings. \
+
+Example instruction: Why is Gazebo commonly used in robotics simulations? \
+Example answer: Gazebo is a 3D simulator used alongside ROS2 to test and validate robotic systems in virtual environments. \
+It simulates physics, sensors, and robot interactions, offering a safe and realistic environment for development. \
+This allows developers to troubleshoot and refine their designs without requiring physical hardware. \
 
 Structure the answer in JSON format, ready to be loaded in Python by json.loads(), as a list of objects.
 Do not add any extra characters and provide your response in JSON format with the following structure:
