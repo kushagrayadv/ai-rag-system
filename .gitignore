@@ -2,3 +2,4 @@
 ai_project_rag_system
 .idea/
 **__pycache__**
+application/dataset.zip
