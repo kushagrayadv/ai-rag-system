@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Iterator
 
 from ollama import Client
 
@@ -8,7 +8,7 @@ from settings import settings
 
 
 
-def call_llm_service(query: str, context: str | None) -> str:
+def call_llm_service(query: str, context: str | None) -> Iterator:
 
   prompt = """
     You are a content creator. Write what the user asked you to while using the provided context as the primary source of information for the content.
