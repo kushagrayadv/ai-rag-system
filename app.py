@@ -5,7 +5,7 @@ from infrastructure.inference_pipeline import rag
 prepopulated_questions = [
   "",
   "Tell me how can I navigate to a specific pose - include replanning aspects in your answer.",
-  "Can you provide me with code for this task?"
+  "Can you provide me with code for navigation to a specific pose while including replanning aspects?"
 ]
 
 

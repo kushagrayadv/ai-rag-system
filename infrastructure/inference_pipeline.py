@@ -21,12 +21,12 @@ def call_llm_service(query: str, context: str | None) -> Iterator:
 
   client = Client(host=settings.OLLAMA_CLIENT_HOST)
 
-  stream = client.chat(model='llama3.2', messages=[
+  stream = client.chat(model='hf.co/billa-man/finetuned-rag-system-robotics-gguf', messages=[
     {
       'role': 'user',
       'content': llm_input,
     },
-  ], stream=True,)
+  ], stream=True)
 
   return stream
 
