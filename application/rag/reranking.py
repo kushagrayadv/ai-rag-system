@@ -2,7 +2,7 @@ from ..networks import CrossEncoderModelSingleton
 from domain.embedded_chunks import EmbeddedChunk
 from domain.queries import Query
 
-from base import RAGStep
+from .base import RAGStep
 
 
 class Reranker(RAGStep):

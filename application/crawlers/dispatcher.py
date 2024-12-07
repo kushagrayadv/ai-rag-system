@@ -4,9 +4,7 @@ from urllib.parse import urlparse
 from loguru import logger
 
 from .base import BaseCrawler
-from .custom_article import CustomArticleCrawler
 from .github import GithubCrawler
-from .medium import MediumCrawler
 from .youtube import YouTubeCrawler
 
 
@@ -19,11 +17,6 @@ class CrawlerDispatcher:
         dispatcher = cls()
 
         return dispatcher
-
-    def register_medium(self) -> "CrawlerDispatcher":
-        self.register("https://medium.com", MediumCrawler)
-
-        return self
 
     def register_github(self) -> "CrawlerDispatcher":
         self.register("https://github.com", GithubCrawler)
@@ -42,10 +35,10 @@ class CrawlerDispatcher:
         self._crawlers[r"https://(www\.)?{}/*".format(re.escape(domain))] = crawler
 
     def get_crawler(self, url: str) -> BaseCrawler:
+        print("BaseCrawler:", url)
         for pattern, crawler in self._crawlers.items():
             if re.match(pattern, url):
                 return crawler()
         else:
-            logger.warning(f"No crawler found for {url}. Defaulting to CustomArticleCrawler.")
-
-            return CustomArticleCrawler()
+            logger.error(f"No crawler found for {url}.")
+            raise Exception(f"No crawler found for {url}")

@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Generic, TypeVar, cast
 
-from app.networks import EmbeddingModelSingleton
+from application.networks import EmbeddingModelSingleton
 from domain.chunks import ArticleChunk, Chunk, PostChunk, RepositoryChunk, VideoChunk
 from domain.embedded_chunks import (
     EmbeddedArticleChunk,
@@ -115,7 +115,6 @@ class RepositoryEmbeddingHandler(EmbeddingDataHandler):
             },
         )
     
-# need to check on this
 class VideoEmbeddingHandler(EmbeddingDataHandler):
     def map_model(self, data_model: VideoChunk, embedding: list[float]) -> EmbeddedVideoChunk:
         return EmbeddedVideoChunk(

@@ -1,4 +1,5 @@
 .env
-ai_project
+ai_project_rag_system
 .idea/
 **__pycache__**
+.gradio

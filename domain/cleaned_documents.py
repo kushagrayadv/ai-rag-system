@@ -44,10 +44,6 @@ class CleanedRepositoryDocument(CleanedDocument):
 class CleanedVideoDocument(CleanedDocument):
     name: str
     link: str
-    description: Optional[str] = None
-    views: Optional[int] = None
-    likes: Optional[int] = None
-    transcript: Optional[str] = None
 
     class Config:
         name = "cleaned_videos"

@@ -135,7 +135,6 @@ class RepositoryChunkingHandler(ChunkingDataHandler):
 
         return data_models_list
 
-# Need to check on this
 class VideoChunkingHandler(ChunkingDataHandler):
     @property
     def metadata(self) -> dict:

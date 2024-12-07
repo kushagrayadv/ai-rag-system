@@ -4,18 +4,18 @@ from loguru import logger
 from qdrant_client.models import FieldCondition, Filter, MatchValue
 
 from .. import utils
-from app.preprocessing.dispatchers import EmbeddingDispatcher
+from application.preprocessing.dispatchers import EmbeddingDispatcher
 from domain.embedded_chunks import (
     EmbeddedArticleChunk,
     EmbeddedChunk,
     EmbeddedPostChunk,
-    EmbeddedRepositoryChunk,
+    EmbeddedRepositoryChunk, EmbeddedVideoChunk,
 )
 from domain.queries import EmbeddedQuery, Query
 
-from query_expansion import QueryExpansion
-from reranking import Reranker
-from self_query import SelfQuery
+from .query_expansion import QueryExpansion
+from .reranking import Reranker
+from .self_query import SelfQuery
 
 
 class ContextRetriever:
@@ -89,8 +89,9 @@ class ContextRetriever:
         post_chunks = _search_data_category(EmbeddedPostChunk, embedded_query)
         articles_chunks = _search_data_category(EmbeddedArticleChunk, embedded_query)
         repositories_chunks = _search_data_category(EmbeddedRepositoryChunk, embedded_query)
+        videos_chunks = _search_data_category(EmbeddedVideoChunk, embedded_query)
 
-        retrieved_chunks = post_chunks + articles_chunks + repositories_chunks
+        retrieved_chunks = post_chunks + articles_chunks + repositories_chunks + videos_chunks
 
         return retrieved_chunks
 

@@ -1,89 +1,80 @@
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from typing import List
+import json
+
+from clearml import Task
 from loguru import logger
-from clearml import Task, Logger
 
-from app import utils
+from application import utils
 from domain.base.nosql import NoSQLBaseDocument
-from domain.documents import ArticleDocument, Document, PostDocument, RepositoryDocument, UserDocument, VideoDocument
+from domain.documents import Document, RepositoryDocument, UserDocument, VideoDocument
 
-def query_data_warehouse(author_full_names: list[str]) -> list:
-    task = Task.init(project_name="Data Warehouse Query", task_name="Query Author Data")
-    task.execute_remotely()
 
-    documents = []
-    authors = []
-    for author_full_name in author_full_names:
-        Logger.current_logger().report_text(f"Querying data warehouse for user: {author_full_name}")
-
-        first_name, last_name = utils.split_user_full_name(author_full_name)
-        Logger.current_logger().report_text(f"First name: {first_name}, Last name: {last_name}")
-        user = UserDocument.get_or_create(first_name=first_name, last_name=last_name)
-        authors.append(user)
-
-        results = fetch_all_data(user)
-        user_documents = [doc for query_result in results.values() for doc in query_result]
-
-        documents.extend(user_documents)
-
-    metadata = _get_metadata(documents)
-    for key, value in metadata.items():
-        if isinstance(value, dict):
-            for sub_key, sub_value in value.items():
-                Logger.current_logger().report_scalar(title=key, series=sub_key, value=sub_value, iteration=0)
-        else:
-            Logger.current_logger().report_scalar(title="Metadata", series=key, value=value, iteration=0)
-
-    return documents
-
-def fetch_all_data(user: UserDocument) -> dict[str, list[NoSQLBaseDocument]]:
+def query_data_warehouse(author_full_names: List[str]) -> List[NoSQLBaseDocument]:
+  def fetch_all_data(user: UserDocument) -> dict[str, List[NoSQLBaseDocument]]:
     user_id = str(user.id)
     with ThreadPoolExecutor() as executor:
-        future_to_query = {
-            executor.submit(__fetch_articles, user_id): "articles",
-            executor.submit(__fetch_posts, user_id): "posts",
-            executor.submit(__fetch_repositories, user_id): "repositories",
-            executor.submit(__fetch_videos, user_id): "videos"
-        }
+      future_to_query = {
+        executor.submit(__fetch_repositories, user_id): "repositories",
+        executor.submit(__fetch_videos, user_id): "videos"
+      }
 
-        results = {}
-        for future in as_completed(future_to_query):
-            query_name = future_to_query[future]
-            try:
-                results[query_name] = future.result()
-            except Exception:
-                logger.exception(f"'{query_name}' request failed.")
-                results[query_name] = []
+      results = {}
+      for future in as_completed(future_to_query):
+        query_name = future_to_query[future]
+        try:
+          results[query_name] = future.result()
+        except Exception:
+          logger.exception(f"'{query_name}' request failed.")
+          results[query_name] = []
 
     return results
 
-def __fetch_articles(user_id) -> list[NoSQLBaseDocument]:
-    return ArticleDocument.bulk_find(author_id=user_id)
-
-def __fetch_posts(user_id) -> list[NoSQLBaseDocument]:
-    return PostDocument.bulk_find(author_id=user_id)
-
-def __fetch_repositories(user_id) -> list[NoSQLBaseDocument]:
+  def __fetch_repositories(user_id) -> List[NoSQLBaseDocument]:
     return RepositoryDocument.bulk_find(author_id=user_id)
 
-def __fetch_videos(user_id) -> list[NoSQLBaseDocument]:
+  def __fetch_videos(user_id) -> List[NoSQLBaseDocument]:
     return VideoDocument.bulk_find(author_id=user_id)
 
-def _get_metadata(documents: list[Document]) -> dict:
+  def _get_metadata(documents: List[Document]) -> dict:
     metadata = {
-        "num_documents": len(documents),
+      "num_documents": len(documents),
     }
     for document in documents:
-        collection = document.get_collection_name()
-        if collection not in metadata:
-            metadata[collection] = {}
-        if "authors" not in metadata[collection]:
-            metadata[collection]["authors"] = list()
+      collection = document.get_collection_name()
+      if collection not in metadata:
+        metadata[collection] = {}
+      if "authors" not in metadata[collection]:
+        metadata[collection]["authors"] = list()
 
-        metadata[collection]["num_documents"] = metadata[collection].get("num_documents", 0) + 1
-        metadata[collection]["authors"].append(document.author_full_name)
+      metadata[collection]["num_documents"] = metadata[collection].get("num_documents", 0) + 1
+      metadata[collection]["authors"].append(document.author_full_name)
 
     for value in metadata.values():
-        if isinstance(value, dict) and "authors" in value:
-            value["authors"] = list(set(value["authors"]))
+      if isinstance(value, dict) and "authors" in value:
+        value["authors"] = list(set(value["authors"]))
 
     return metadata
+
+  documents = []
+  authors = []
+  print(author_full_names)
+  print(type(author_full_names))
+  for author_full_name in author_full_names:
+    logger.info(f"Querying data warehouse for user: {author_full_name}")
+
+    first_name, last_name = utils.split_user_full_name(author_full_name)
+    logger.info(f"First name: {first_name}, Last name: {last_name}")
+    user = UserDocument.get_or_create(first_name=first_name, last_name=last_name)
+    authors.append(user)
+
+    results = fetch_all_data(user)
+    user_documents = [doc for query_result in results.values() for doc in query_result]
+
+    documents.extend(user_documents)
+
+  metadata = _get_metadata(documents)
+  task = Task.current_task()
+  task.upload_artifact("user_documents", documents, metadata=metadata)
+
+  return documents

@@ -71,7 +71,6 @@ class RepositoryCleaningHandler(CleaningDataHandler):
             author_full_name=data_model.author_full_name,
         )
     
-# need to check on this
 class VideoCleaningHandler(CleaningDataHandler):
     def clean(self, data_model: VideoDocument) -> CleanedVideoDocument:
         return CleanedVideoDocument(

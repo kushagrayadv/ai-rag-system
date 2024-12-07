@@ -1,6 +1,6 @@
 from langchain.prompts import PromptTemplate
 
-from base import PromptTemplateFactory
+from .base import PromptTemplateFactory
 
 
 class QueryExpansionTemplate(PromptTemplateFactory):
