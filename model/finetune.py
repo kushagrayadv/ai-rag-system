@@ -167,18 +167,6 @@ def save_model(model: Any, tokenizer: Any, output_dir: str, push_to_hub: bool = 
         print(f"Saving model to '{repo_id}'")  # noqa
         model.push_to_hub_merged(repo_id, tokenizer, save_method="merged_16bit")
 
-def save_model_as_qlora(model: Any, tokenizer: Any, output_dir: str, push_to_hub: bool = False, repo_id: Optional[str] = None):
-
-    model.save_pretrained(output_dir)
-    tokenizer.save_pretrained(output_dir)
-
-    print(f"QLoRA model saved at '{output_dir}'")
-
-    if push_to_hub and repo_id:
-        print(f"Pushing QLoRA model to '{repo_id}'")
-        model.push_to_hub(repo_id)
-        tokenizer.push_to_hub(repo_id)
-
 
 def check_if_huggingface_model_exists(model_id: str, default_value: str = "mlabonne/TwinLlama-3.1") -> str:
     api = HfApi()
@@ -231,7 +219,7 @@ if __name__ == "__main__":
 
     if args.finetuning_type == "sft":
         print("Starting SFT training...")  # noqa
-        base_model_name = "meta-llama/Meta-Llama-3.1-8B"
+        base_model_name = "meta-llama/Llama-3.2-3B-Instruct"
         print(f"Training from base model '{base_model_name}'")  # noqa
 
         output_dir_sft = Path(args.model_dir) / "output_sft"
@@ -247,5 +235,5 @@ if __name__ == "__main__":
         )
         inference(model, tokenizer)
 
-        sft_output_model_repo_id = f"{args.model_output_huggingface_workspace}/finetuned-rag-system-robotics-qlora"
-        save_model_as_qlora(model, tokenizer, "model_sft", push_to_hub=True, repo_id=sft_output_model_repo_id)
+        sft_output_model_repo_id = f"{args.model_output_huggingface_workspace}/finetuned-rag-system-robotics"
+        save_model(model, tokenizer, "model_sft", push_to_hub=True, repo_id=sft_output_model_repo_id)
