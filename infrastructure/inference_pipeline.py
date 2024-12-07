@@ -1,6 +1,5 @@
 from typing import Any
 
-import ollama
 from ollama import Client
 
 from application.rag.retriever import ContextRetriever
