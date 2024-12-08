@@ -12,26 +12,12 @@ from domain.base import VectorBaseDocument
 from domain.types import DataCategory
 
 
-class DatasetType(Enum):
-    INSTRUCTION = "instruction"
-    PREFERENCE = "preference"
-
-
 class InstructDatasetSample(VectorBaseDocument):
     instruction: str
     answer: str
 
     class Config:
         category = DataCategory.INSTRUCT_DATASET_SAMPLES
-
-
-class PreferenceDatasetSample(VectorBaseDocument):
-    instruction: str
-    rejected: str
-    chosen: str
-
-    class Config:
-        category = DataCategory.PREFERENCE_DATASET_SAMPLES
 
 
 class InstructDataset(VectorBaseDocument):
@@ -81,42 +67,5 @@ class InstructTrainTestSplit(TrainTestSplit):
         category = DataCategory.INSTRUCT_DATASET
 
 
-class PreferenceDataset(VectorBaseDocument):
-    category: DataCategory
-    samples: list[PreferenceDatasetSample]
-
-    class Config:
-        category = DataCategory.PREFERENCE_DATASET
-
-    @property
-    def num_samples(self) -> int:
-        return len(self.samples)
-
-    def to_huggingface(self) -> "Dataset":
-        data = [sample.model_dump() for sample in self.samples]
-
-        return Dataset.from_dict(
-            {
-                "prompt": [d["instruction"] for d in data],
-                "rejected": [d["rejected"] for d in data],
-                "chosen": [d["chosen"] for d in data],
-            }
-        )
-
-
-class PreferenceTrainTestSplit(TrainTestSplit):
-    train: dict[DataCategory, PreferenceDataset]
-    test: dict[DataCategory, PreferenceDataset]
-    test_split_size: float
-
-    class Config:
-        category = DataCategory.PREFERENCE_DATASET
-
-
-def build_dataset(dataset_type, *args, **kwargs) -> InstructDataset | PreferenceDataset:
-    if dataset_type == DatasetType.INSTRUCTION:
-        return InstructDataset(*args, **kwargs)
-    elif dataset_type == DatasetType.PREFERENCE:
-        return PreferenceDataset(*args, **kwargs)
-    else:
-        raise ValueError(f"Invalid dataset type: {dataset_type}")
+def build_dataset(*args, **kwargs) -> InstructDataset:
+    return InstructDataset(*args, **kwargs)

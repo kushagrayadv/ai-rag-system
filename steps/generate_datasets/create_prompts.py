@@ -2,16 +2,14 @@ from clearml import Task
 from typing_extensions import Annotated
 
 from application.dataset import generation
-from domain.dataset import DatasetType
 from domain.prompt import GenerateDatasetSamplesPrompt
 from domain.types import DataCategory
 
 
 def create_prompts(
-  documents: Annotated[list, "queried_cleaned_documents"],
-dataset_type: Annotated[DatasetType, "dataset_type"],
+  documents: Annotated[list, "queried_cleaned_documents"]
 ) -> Annotated[dict[DataCategory, list[GenerateDatasetSamplesPrompt]], "prompts"]:
-  dataset_generator = generation.get_dataset_generator(dataset_type)
+  dataset_generator = generation.get_dataset_generator()
   grouped_prompts = dataset_generator.get_prompts(documents)
 
   prompt_categories = list(grouped_prompts.keys())
