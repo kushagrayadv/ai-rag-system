@@ -8,15 +8,15 @@ from domain.queries import Query
 
 
 class PromptTemplateFactory(ABC, BaseModel):
-    @abstractmethod
-    def create_template(self) -> PromptTemplate:
-        pass
+  @abstractmethod
+  def create_template(self) -> PromptTemplate:
+    pass
 
 
 class RAGStep(ABC):
-    def __init__(self, mock: bool = False) -> None:
-        self._mock = mock
+  def __init__(self, mock: bool = False) -> None:
+    self._mock = mock
 
-    @abstractmethod
-    def generate(self, query: Query, *args, **kwargs) -> Any:
-        pass
+  @abstractmethod
+  def generate(self, query: Query, *args, **kwargs) -> Any:
+    pass
