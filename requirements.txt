@@ -26,4 +26,6 @@ scikit-learn
 tiktoken
 langchain-core
 trl
-# unsloth[cu124-torch250] @ git+https://github.com/unslothai/unsloth.git
+unsloth
+ollama
+gradio

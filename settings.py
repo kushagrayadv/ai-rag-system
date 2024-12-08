@@ -44,6 +44,8 @@ class Settings(BaseSettings):
 
   # --- Optional settings used to tweak the code. ---
 
+  OLLAMA_CLIENT_HOST: str = "http://localhost:11434"
+
   # AWS SageMaker
   HF_MODEL_ID: str = "EleutherAI/gpt-neo-2.7B"
   GPU_INSTANCE_TYPE: str = "ml.g5.2xlarge"
