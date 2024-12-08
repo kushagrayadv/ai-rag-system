@@ -7,15 +7,12 @@ from domain.embedded_chunks import EmbeddedChunk
 from settings import settings
 
 
-
 def call_llm_service(query: str, context: str | None) -> Iterator:
-
   prompt = """
     You are a content creator. Write what the user asked you to while using the provided context as the primary source of information for the content.
     User query: {query}
     Context: {context}
   """
-
 
   llm_input = prompt.format(query=query, context=context)
 
