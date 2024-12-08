@@ -5,25 +5,10 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
   model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 
-  # --- Required settings even when working locally. ---
-
-  # OpenAI API
-  OPENAI_MODEL_ID: str = "gpt-4o-mini"
-
-  # sohith's token
-  OPENAI_API_KEY: str | None = "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"
-
   # Huggingface API
   HUGGINGFACE_ACCESS_TOKEN: str | None = "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"
 
   DATASET_ID: str = "billa-man/ai-rag-system-dataset-large"
-
-  # Comet ML (during training)
-  COMET_API_KEY: str | None = None
-  COMET_PROJECT: str = "twin"
-
-  # --- Required settings when deploying the code. ---
-  # --- Otherwise, default values work fine. ---
 
   # MongoDB database
   DATABASE_HOST: str = "mongodb+srv://sb10225:yxLjqum1UUbjya0A@ai-rag-system-large.vzo38.mongodb.net/"
@@ -35,38 +20,20 @@ class Settings(BaseSettings):
   QDRANT_DATABASE_PORT: int = 6333
   QDRANT_CLOUD_URL: str = "https://46bc3ea1-a986-4097-bbd2-d1f39ae06eee.europe-west3-0.gcp.cloud.qdrant.io:6333"
   QDRANT_APIKEY: str | None = "mfK7Aq6sEV-zwsM7ADKHYcpxGw9t-DgEf2VJoRe9TXHIpCRYqnbVbw"
-
-  # AWS Authentication
-  AWS_REGION: str = "eu-central-1"
-  AWS_ACCESS_KEY: str | None = None
-  AWS_SECRET_KEY: str | None = None
-  AWS_ARN_ROLE: str | None = None
-
   # --- Optional settings used to tweak the code. ---
 
   OLLAMA_CLIENT_HOST: str = "http://localhost:11434"
-
-  # AWS SageMaker
-  HF_MODEL_ID: str = "EleutherAI/gpt-neo-2.7B"
-  GPU_INSTANCE_TYPE: str = "ml.g5.2xlarge"
-  SM_NUM_GPUS: int = 1
-  MAX_INPUT_LENGTH: int = 2048
-  MAX_TOTAL_TOKENS: int = 4096
-  MAX_BATCH_TOTAL_TOKENS: int = 4096
-  COPIES: int = 1  # Number of replicas
-  GPUS: int = 1  # Number of GPUs
-  CPUS: int = 2  # Number of CPU cores
-
-  SAGEMAKER_ENDPOINT_CONFIG_INFERENCE: str = "twin"
-  SAGEMAKER_ENDPOINT_INFERENCE: str = "twin"
-  TEMPERATURE_INFERENCE: float = 0.01
-  TOP_P_INFERENCE: float = 0.9
-  MAX_NEW_TOKENS_INFERENCE: int = 150
 
   # RAG
   TEXT_EMBEDDING_MODEL_ID: str = "sentence-transformers/all-MiniLM-L6-v2"
   RERANKING_CROSS_ENCODER_MODEL_ID: str = "cross-encoder/ms-marco-MiniLM-L-4-v2"
   RAG_MODEL_DEVICE: str = "cpu"
+
+  # OpenAI API
+  OPENAI_MODEL_ID: str = "gpt-4o-mini"
+
+  # sohith's token
+  OPENAI_API_KEY: str | None = "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"
 
   @property
   def OPENAI_MAX_TOKEN_WINDOW(self) -> int:
