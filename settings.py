@@ -29,6 +29,8 @@ class Settings(BaseSettings):
   RERANKING_CROSS_ENCODER_MODEL_ID: str = "cross-encoder/ms-marco-MiniLM-L-4-v2"
   RAG_MODEL_DEVICE: str = "cpu"
 
+  HF_MODEL_ID: str = "billa-man/finetuned-rag-system-robotics"
+
   # OpenAI API
   OPENAI_MODEL_ID: str = "gpt-4o-mini"
 
