@@ -31,8 +31,8 @@ class Settings(BaseSettings):
   USE_QDRANT_CLOUD: bool = True
   QDRANT_DATABASE_HOST: str = "localhost"
   QDRANT_DATABASE_PORT: int = 6333
-  QDRANT_CLOUD_URL: str = "https://6f00fbd5-b1e3-424c-acad-8bd09a9c7090.us-west-1-0.aws.cloud.qdrant.io:6333"
-  QDRANT_APIKEY: str | None = "apgKddFp_XPkbVREmxGetfqhvqI4ivjrBva9bJMG7FH4g0OpzOdoBg"
+  QDRANT_CLOUD_URL: str = "https://46bc3ea1-a986-4097-bbd2-d1f39ae06eee.europe-west3-0.gcp.cloud.qdrant.io:6333"
+  QDRANT_APIKEY: str | None = "mfK7Aq6sEV-zwsM7ADKHYcpxGw9t-DgEf2VJoRe9TXHIpCRYqnbVbw"
 
   # AWS Authentication
   AWS_REGION: str = "eu-central-1"
