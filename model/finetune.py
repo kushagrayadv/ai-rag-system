@@ -100,7 +100,10 @@ def finetune(
 
         dataset1 = load_dataset("billa-man/ai-rag-system-dataset-large", split="train")
         dataset2 = load_dataset("mlabonne/FineTome-Alpaca-100k", split="train[:10000]")
-        dataset = concatenate_datasets([dataset1, dataset2])
+        dataset3 = load_dataset("iamtarun/code_instructions_120k_alpaca", split="train[:10000]")
+
+        dataset = concatenate_datasets([dataset1, dataset2, dataset3])
+
         if is_dummy:
             dataset = dataset.select(range(400))
         print(f"Loaded dataset with {len(dataset)} samples.")  # noqa
@@ -149,8 +152,8 @@ def finetune(
 def inference(
     model: Any,
     tokenizer: Any,
-    prompt: str = "Tell me how can I navigate to a specific pose - include replanning aspects in your answer.",
-    max_new_tokens: int = 256,
+    prompt: str = "Tell me how can I navigate to a specific pose - include replanning aspects in your answer. Can you provide me with code for this task?",
+    max_new_tokens: int = 512,
 ) -> None:
     model = FastLanguageModel.for_inference(model)
     message = alpaca_template.format(prompt, "")
