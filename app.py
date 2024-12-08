@@ -16,6 +16,8 @@ def get_response(selected_question):
   # Update the response in chunks
   for chunk in answer_stream:
     response += chunk['message']['content']
+    print(chunk['message']['content'], end='', flush=True)
+    print(chunk['message']['content'], end='', flush=True)
     yield response  # Stream the output live
 
 

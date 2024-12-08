@@ -47,7 +47,7 @@ class Settings(BaseSettings):
   OLLAMA_CLIENT_HOST: str = "http://localhost:11434"
 
   # AWS SageMaker
-  HF_MODEL_ID: str = "EleutherAI/gpt-neo-2.7B"
+  HF_MODEL_ID: str = "billa-man/finetuned-rag-system-robotics"
   GPU_INSTANCE_TYPE: str = "ml.g5.2xlarge"
   SM_NUM_GPUS: int = 1
   MAX_INPUT_LENGTH: int = 2048
