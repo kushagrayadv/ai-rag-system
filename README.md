@@ -15,5 +15,5 @@ This repository contains the code for the final project for the course Artificia
 The demo/outputs of the various milestones of the project are presented in the **milestone_outputs.ipynb** file.
 
 ### Note
-- Due to rate limitations while creating an instruction dataset, we reduced that dataset to only include 1 repository and 5 youtube videos for each domain.
+- Due to rate limitations while creating an instruction dataset (screenshots are added), we reduced that dataset to only include 1 repository and 5 youtube videos for each domain.
 - All the screenshots are of before cutting the size of the dataset.
