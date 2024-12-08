@@ -24,7 +24,7 @@ crawl_urls = [
     # github
     # "https://github.com/ros-navigation/navigation2",
     # "https://github.com/ros-navigation/docs.nav2.org",
-    # "https://github.com/ros-navigation/navigation2_tutorials",
+    "https://github.com/ros-navigation/navigation2_tutorials",
     # "https://www.youtube.com/watch?v=idQb2pB-h2Q",
     # "https://www.youtube.com/watch?v=KIbgZqfppAI",
 
@@ -41,15 +41,12 @@ crawl_urls = [
 
   # movit2
     # github
-    # "https://github.com/moveit/moveit2",
-    # "https://github.com/moveit/moveit2_tutorials",
-    # "https://github.com/moveit/moveit_task_constructor",
+    "https://github.com/moveit/moveit_task_constructor",
     # "https://www.youtube.com/watch?v=k85fH0snRm8",
     # "https://www.youtube.com/watch?v=GuOgQzuwNB0",
 
     # "https://github.com/moveit/moveit_visual_tools",
     # "https://github.com/moveit/moveit_msgs",
-    # "https://github.com/moveit/moveit_resources",
     # "https://www.youtube.com/watch?v=mssxW3VJ1IQ",
     # "https://www.youtube.com/watch?v=kR7w5uvykRg",
 
@@ -73,7 +70,7 @@ crawl_urls = [
     # "https://www.youtube.com/watch?v=laWn7_cj434",
 
     # "https://github.com/gazebosim/gz-fuel-tools",
-    # "https://github.com/gazebosim/ros_gz",
+    "https://github.com/gazebosim/ros_gz",
     # "https://github.com/gazebosim/sdformat",
     # "https://www.youtube.com/watch?v=CDafpwH4IuE",
 
