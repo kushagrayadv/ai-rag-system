@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 
 import tiktoken
 from langchain_core.exceptions import OutputParserException
-from langchain_core.language_models.fake import FakeListLLM
 from langchain_core.messages import BaseMessage, HumanMessage, SystemMessage
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
@@ -15,7 +14,6 @@ from domain.dataset import DatasetType, TrainTestSplit
 from domain.prompt import GenerateDatasetSamplesPrompt, Prompt
 from domain.types import DataCategory
 from settings import settings
-from . import constants
 from . import utils as generation_utils
 from .output_parsers import ListPydanticOutputParser
 
@@ -93,8 +91,7 @@ Provide your response in JSON format.
   def generate(
     cls,
     prompts: dict[DataCategory, list[GenerateDatasetSamplesPrompt]],
-    test_size: float = 0.2,
-    mock: bool = False,
+    test_size: float = 0.2
   ) -> TrainTestSplit:
     assert cls.dataset_type is not None, "Dataset type must be set before calling generate()"
 
@@ -108,17 +105,14 @@ Provide your response in JSON format.
 
       return messages
 
-    if mock:
-      llm = FakeListLLM(responses=[constants.get_mocked_response(cls.dataset_type)])
-    else:
-      assert settings.OPENAI_API_KEY is not None, "OpenAI API key must be set to generate datasets"
+    assert settings.OPENAI_API_KEY is not None, "OpenAI API key must be set to generate datasets"
 
-      llm = ChatOpenAI(
-        model=settings.OPENAI_MODEL_ID,
-        api_key=settings.OPENAI_API_KEY,
-        max_tokens=2000 if cls.dataset_type == DatasetType.PREFERENCE else 1200,
-        temperature=0.7,
-      )
+    llm = ChatOpenAI(
+      model=settings.OPENAI_MODEL_ID,
+      api_key=settings.OPENAI_API_KEY,
+      max_tokens=1200,
+      temperature=0.7,
+    )
     parser = ListPydanticOutputParser(pydantic_object=cls._get_dataset_sample_type())
 
     chain = llm | parser
