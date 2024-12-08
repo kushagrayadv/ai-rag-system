@@ -9,36 +9,36 @@ from .youtube import YouTubeCrawler
 
 
 class CrawlerDispatcher:
-    def __init__(self) -> None:
-        self._crawlers = {}
+  def __init__(self) -> None:
+    self._crawlers = {}
 
-    @classmethod
-    def build(cls) -> "CrawlerDispatcher":
-        dispatcher = cls()
+  @classmethod
+  def build(cls) -> "CrawlerDispatcher":
+    dispatcher = cls()
 
-        return dispatcher
+    return dispatcher
 
-    def register_github(self) -> "CrawlerDispatcher":
-        self.register("https://github.com", GithubCrawler)
+  def register_github(self) -> "CrawlerDispatcher":
+    self.register("https://github.com", GithubCrawler)
 
-        return self
-    
-    def register_youtube(self) -> "CrawlerDispatcher":
-        self.register("https://youtube.com", YouTubeCrawler)
+    return self
 
-        return self
+  def register_youtube(self) -> "CrawlerDispatcher":
+    self.register("https://youtube.com", YouTubeCrawler)
 
-    def register(self, domain: str, crawler: type[BaseCrawler]) -> None:
-        parsed_domain = urlparse(domain)
-        domain = parsed_domain.netloc
+    return self
 
-        self._crawlers[r"https://(www\.)?{}/*".format(re.escape(domain))] = crawler
+  def register(self, domain: str, crawler: type[BaseCrawler]) -> None:
+    parsed_domain = urlparse(domain)
+    domain = parsed_domain.netloc
 
-    def get_crawler(self, url: str) -> BaseCrawler:
-        print("BaseCrawler:", url)
-        for pattern, crawler in self._crawlers.items():
-            if re.match(pattern, url):
-                return crawler()
-        else:
-            logger.error(f"No crawler found for {url}.")
-            raise Exception(f"No crawler found for {url}")
+    self._crawlers[r"https://(www\.)?{}/*".format(re.escape(domain))] = crawler
+
+  def get_crawler(self, url: str) -> BaseCrawler:
+    print("BaseCrawler:", url)
+    for pattern, crawler in self._crawlers.items():
+      if re.match(pattern, url):
+        return crawler()
+    else:
+      logger.error(f"No crawler found for {url}.")
+      raise Exception(f"No crawler found for {url}")

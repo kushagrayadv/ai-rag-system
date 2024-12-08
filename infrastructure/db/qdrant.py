@@ -6,38 +6,38 @@ from settings import settings
 
 
 class QdrantDatabaseConnector:
-    _instance: QdrantClient | None = None
+  _instance: QdrantClient | None = None
 
-    def __new__(cls, *args, **kwargs) -> QdrantClient:
-        if cls._instance is None:
-            try:
-                if settings.USE_QDRANT_CLOUD:
-                    cls._instance = QdrantClient(
-                        url=settings.QDRANT_CLOUD_URL,
-                        api_key=settings.QDRANT_APIKEY,
-                    )
+  def __new__(cls, *args, **kwargs) -> QdrantClient:
+    if cls._instance is None:
+      try:
+        if settings.USE_QDRANT_CLOUD:
+          cls._instance = QdrantClient(
+            url=settings.QDRANT_CLOUD_URL,
+            api_key=settings.QDRANT_APIKEY,
+          )
 
-                    uri = settings.QDRANT_CLOUD_URL
-                else:
-                    cls._instance = QdrantClient(
-                        host=settings.QDRANT_DATABASE_HOST,
-                        port=settings.QDRANT_DATABASE_PORT,
-                    )
+          uri = settings.QDRANT_CLOUD_URL
+        else:
+          cls._instance = QdrantClient(
+            host=settings.QDRANT_DATABASE_HOST,
+            port=settings.QDRANT_DATABASE_PORT,
+          )
 
-                    uri = f"{settings.QDRANT_DATABASE_HOST}:{settings.QDRANT_DATABASE_PORT}"
+          uri = f"{settings.QDRANT_DATABASE_HOST}:{settings.QDRANT_DATABASE_PORT}"
 
-                logger.info(f"Connection to Qdrant DB with URI successful: {uri}")
-            except UnexpectedResponse:
-                logger.exception(
-                    "Couldn't connect to Qdrant.",
-                    host=settings.QDRANT_DATABASE_HOST,
-                    port=settings.QDRANT_DATABASE_PORT,
-                    url=settings.QDRANT_CLOUD_URL,
-                )
+        logger.info(f"Connection to Qdrant DB with URI successful: {uri}")
+      except UnexpectedResponse:
+        logger.exception(
+          "Couldn't connect to Qdrant.",
+          host=settings.QDRANT_DATABASE_HOST,
+          port=settings.QDRANT_DATABASE_PORT,
+          url=settings.QDRANT_CLOUD_URL,
+        )
 
-                raise
+        raise
 
-        return cls._instance
+    return cls._instance
 
 
 connection = QdrantDatabaseConnector()
