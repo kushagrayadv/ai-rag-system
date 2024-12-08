@@ -153,7 +153,7 @@ def inference(
     model: Any,
     tokenizer: Any,
     prompt: str = "Tell me how can I navigate to a specific pose - include replanning aspects in your answer. Can you provide me with code for this task?",
-    max_new_tokens: int = 256,
+    max_new_tokens: int = 512,
 ) -> None:
     model = FastLanguageModel.for_inference(model)
     message = alpaca_template.format(prompt, "")
