@@ -6,6 +6,7 @@ Team Members
 2. Sohith Bandari
    * NYU ID - N10232767
    * NYU email - sb10225@nyu.edu
+   * huggingface - billa-man
 
 # Finetuned RAG system
 
