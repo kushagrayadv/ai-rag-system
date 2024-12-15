@@ -1,24 +1,13 @@
-Team Members
-1. Kushagra Yadav 
-   * NYU ID - N10381346
-   * NYU email - ky2684@nyu.edu
-
-2. Sohith Bandari
-   * NYU ID - N10232767
-   * NYU email - sb10225@nyu.edu
-   * huggingface - billa-man
-
-# Finetuned RAG system
+# Subdomain-Savvy RAG: Enabling ROS2 Developers with Targeted Navigation Support
 
 
-## CS-GY 6613 Fall 2024
+## Overview
+Subdomain-Savvy RAG is a Retrieval-Augmented Generation (RAG) system designed to assist ROS2 developers by providing targeted navigation support. The system enhances the development experience by integrating domain-specific knowledge retrieval with generative AI capabilities, ensuring developers receive accurate, context-aware responses to their queries.
 
-This repository contains the code for the final project for the course Artificial Intelligence(CS-GY 6613).
+## Features
+* Context-Aware Retrieval: Uses a vector search mechanism to fetch relevant ROS2 documentation and resources based on developer queries.
+* Generative AI Integration: Combines retrieved information with LLM-based reasoning to generate precise and helpful responses.
+* Subdomain Specialization: Adapts to different ROS2 subdomains (e.g., navigation, perception, control) for improved query relevance.
 
-The demo/outputs of the various milestones of the project are presented in the **milestone_outputs.ipynb** file.
-Results of fine-tuning the model can be viewed in the `finetuning_result.txt` file.
-All RAG pipeline flowcharts can be viewed separately at `screenshots/clearml/`.
-
-### Note
-- Due to rate limitations while creating an instruction dataset (screenshots are added), we reduced that dataset to only include 1 repository and 5 youtube videos for each domain.
-- All the screenshots in the screenshot folder are of before cutting the size of the dataset.
+## Use Case
+This tool is ideal for ROS2 developers seeking quick, accurate, and structured answers to their questions without sifting through extensive documentation. It helps streamline development by reducing search time and improving the accuracy of retrieved information.
